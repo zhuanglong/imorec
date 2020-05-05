@@ -27,6 +27,9 @@ dependencies:
   fluttertoast: ^4.0.0
   flutter_webview_plugin: ^0.3.1
   share: ^0.6.4
+  dio: ^3.0.9
+  html: ^0.14.0+3
+  http: ^0.12.1
 
 dev_dependencies:
   flutter_test:
