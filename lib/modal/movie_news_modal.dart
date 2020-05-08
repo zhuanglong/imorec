@@ -1,13 +1,14 @@
 // 首页新闻 banner
-class MovieNews {
+
+class MovieNewsModal {
   String title;
   String cover;
   String summary;
   String link;
 
-  MovieNews(this.title, this.cover, this.summary, this.link);
+  MovieNewsModal(this.title, this.cover, this.summary, this.link);
 
-  MovieNews.fromJson(Map data) {
+  MovieNewsModal.fromJson(Map data) {
     title = data['title'];
     summary = data['summary'];
     cover = data['cover'];

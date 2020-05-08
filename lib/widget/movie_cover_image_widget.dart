@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-class MovieCoverImage extends StatelessWidget {
+class MovieCoverImageWidget extends StatelessWidget {
   final String url;
   final double width;
   final double height;
 
-  MovieCoverImage(this.url, {this.width, this.height});
+  MovieCoverImageWidget(this.url, {this.width, this.height});
 
   @override
   Widget build(BuildContext context) {

@@ -7,16 +7,16 @@ import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 import 'package:imorec/util/screen.dart';
 
-class WebViewScene extends StatefulWidget {
+class WebViewWidget extends StatefulWidget {
   final String url;
   final String title;
 
-  WebViewScene({@required this.url, this.title});
+  WebViewWidget({@required this.url, this.title});
 
-  _WebViewSceneState createState() => _WebViewSceneState();
+  _WebViewWidgetState createState() => _WebViewWidgetState();
 }
 
-class _WebViewSceneState extends State<WebViewScene> {
+class _WebViewWidgetState extends State<WebViewWidget> {
   @override
   void dispose() {
     Screen.updateStatusBarStyle(SystemUiOverlayStyle.light);

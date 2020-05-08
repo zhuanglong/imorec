@@ -1,22 +1,22 @@
 // 电影简介 item
 
-import 'movie_image.dart';
-import 'movie_rate.dart';
-import 'movie_actor.dart';
+import 'movie_image_modal.dart';
+import 'movie_rate_modal.dart';
+import 'movie_actor_modal.dart';
 
-class MovieItem {
+class MovieItemModal {
   List genres;
-  MovieRate rating;
+  MovieRateModal rating;
   String title;
   String year;
-  MovieImage images;
+  MovieImageModal images;
   String id;
   String mainlandPubdate;
   int collectCount;
-  List<MovieActor> casts;
-  List<MovieActor> directors;
+  List<MovieActorModal> casts;
+  List<MovieActorModal> directors;
 
-  MovieItem(
+  MovieItemModal(
     this.genres,
     this.rating,
     this.title,
@@ -29,24 +29,24 @@ class MovieItem {
     this.directors,
   );
 
-  MovieItem.fromJson(Map data) {
+  MovieItemModal.fromJson(Map data) {
     id = data['id'];
-    images = MovieImage.fromJson(data['images']);
+    images = MovieImageModal.fromJson(data['images']);
     year = data['year'];
     title = data['title'];
     genres = data['genres']?.cast<String>()?.toList();
-    rating = MovieRate.fromJson(data['rating']);
+    rating = MovieRateModal.fromJson(data['rating']);
     mainlandPubdate = data['mainland_pubdate'];
     collectCount = data['collect_count'];
     
-    List<MovieActor> castsData = [];
-    List<MovieActor> directorsData = [];
+    List<MovieActorModal> castsData = [];
+    List<MovieActorModal> directorsData = [];
 
     for (int i = 0; i < data['casts'].length; i++) {
-      castsData.add(MovieActor.fromJson(data['casts'][i]));
+      castsData.add(MovieActorModal.fromJson(data['casts'][i]));
     }
     for (int i = 0; i < data['directors'].length; i++) {
-      directorsData.add(MovieActor.fromJson(data['directors'][i]));
+      directorsData.add(MovieActorModal.fromJson(data['directors'][i]));
     }
 
     casts = castsData;

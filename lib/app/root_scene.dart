@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:imorec/home/home_scene.dart';
-import 'package:imorec/my/my_scene.dart';
+import 'package:imorec/home/home_page.dart';
+import 'package:imorec/my/my_page.dart';
 
 import 'package:imorec/app/constant.dart';
 import 'package:imorec/app/app_color.dart';
-
 import 'package:imorec/util/event_bus.dart';
 
 class RootScene extends StatefulWidget {
@@ -52,8 +51,8 @@ class _RootSceneState extends State<RootScene> {
     return Scaffold(
       body: IndexedStack(
         children: <Widget>[
-          HomeScene(),
-          MyScene(),
+          HomePage(),
+          MyPage(),
         ],
         index: _tabIndex,
       ),

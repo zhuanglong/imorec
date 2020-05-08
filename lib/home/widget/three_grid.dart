@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
-import 'package:imorec/modal/movie_item.dart';
-import 'package:imorec/home/section_widget.dart';
+import 'package:imorec/home/widget/section_bar.dart';
+import 'package:imorec/modal/movie_item_modal.dart';
 import 'package:imorec/util/screen.dart';
 import 'package:imorec/app/app_color.dart';
-import 'package:imorec/widget/rating.dart';
-import 'package:imorec/widget/movie_cover_image.dart';
+import 'package:imorec/widget/rating_widget.dart';
+import 'package:imorec/widget/movie_cover_image_widget.dart';
 
-class ThreeGridWidget extends StatelessWidget {
-  final List<MovieItem> movies;
+class ThreeGrid extends StatelessWidget {
+  final List<MovieItemModal> movies;
   final String title;
-  final String action;
+  final Function action;
 
   // 图片的宽度
   final double _coverImageWidth = (Screen.width - 15 * 4) / 3;
 
-  ThreeGridWidget(this.movies, this.title, this.action);
+  ThreeGrid(this.movies, this.title, this.action);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class ThreeGridWidget extends StatelessWidget {
       color: Colors.white,
       child: Column(
         children: <Widget>[
-          SectionWidget(title, action),
+          SectionBar(title, action),
           Container(
             padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
             child: Wrap(spacing: 15, runSpacing: 20, children: children),
@@ -48,7 +48,7 @@ class ThreeGridWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildCoverWithTitle({MovieItem movie, Widget child, onTap}) {
+  Widget _buildCoverWithTitle({MovieItemModal movie, Widget child, onTap}) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -56,7 +56,7 @@ class ThreeGridWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            MovieCoverImage(movie.images.small, width: _coverImageWidth, height: _coverImageWidth / 0.75),
+            MovieCoverImageWidget(movie.images.small, width: _coverImageWidth, height: _coverImageWidth / 0.75),
             SizedBox(height: 5),
             Text(
               movie.title,
@@ -75,7 +75,7 @@ class ThreeGridWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildHotting(MovieItem movie) {
+  Widget _buildHotting(MovieItemModal movie) {
     return _buildCoverWithTitle(
       movie: movie,
       onTap: () {
@@ -97,7 +97,7 @@ class ThreeGridWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildComing(MovieItem movie) {
+  Widget _buildComing(MovieItemModal movie) {
     return _buildCoverWithTitle(
       movie: movie,
       onTap: () {

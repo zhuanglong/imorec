@@ -4,13 +4,13 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:imorec/app/app_navigator.dart';
 
-import 'package:imorec/modal/movie_news.dart';
+import 'package:imorec/modal/movie_news_modal.dart';
 import 'package:imorec/app/app_color.dart';
 
-class NewsBannerWidget extends StatelessWidget {
-  final List<MovieNews> newsList;
+class NewsBanner extends StatelessWidget {
+  final List<MovieNewsModal> newsList;
 
-  NewsBannerWidget(this.newsList);
+  NewsBanner(this.newsList);
 
   @override
   Widget build(BuildContext context) {

@@ -1,13 +1,13 @@
 // 电影封面图片
 
-class MovieImage {
+class MovieImageModal {
   String small;
   String large;
   String medium;
 
-  MovieImage(this.small, this.large, this.medium);
+  MovieImageModal(this.small, this.large, this.medium);
 
-  MovieImage.fromJson(Map data) {
+  MovieImageModal.fromJson(Map data) {
     small = data['small'];
     large = data['large'];
     medium = data['medium'];

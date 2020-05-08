@@ -1,6 +1,6 @@
+import 'dart:ui' as ui show window;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'dart:ui' as ui show window;
 
 MediaQueryData mediaQuery() {
   return MediaQueryData.fromWindow(ui.window);

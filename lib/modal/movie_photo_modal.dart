@@ -1,6 +1,6 @@
 // 电影剧照
 
-class MoviePhoto {
+class MoviePhotoModal {
   String thumb;
   String image;
   String cover;
@@ -8,9 +8,9 @@ class MoviePhoto {
   String id;
   String icon;
 
-  MoviePhoto(this.thumb, this.image, this.cover, this.alt, this.id, this.icon);
+  MoviePhotoModal(this.thumb, this.image, this.cover, this.alt, this.id, this.icon);
 
-  MoviePhoto.fromJson(Map data) {
+  MoviePhotoModal.fromJson(Map data) {
     thumb = data['thumb'];
     image = data['image'];
     cover = data['cover'];

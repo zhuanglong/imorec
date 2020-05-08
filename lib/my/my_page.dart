@@ -9,18 +9,18 @@ import 'package:imorec/app/app_color.dart';
 import 'package:imorec/util/screen.dart';
 import 'package:imorec/util/toast.dart';
 
-class MyScene extends StatefulWidget {
+class MyPage extends StatefulWidget {
   @override
-  _MySceneState createState() => _MySceneState();
+  _MyPageState createState() => _MyPageState();
 }
 
-class _MySceneState extends State<MyScene> {
+class _MyPageState extends State<MyPage> {
   String _avatarUrl = 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3454574876,1377139334&fm=27&gp=0.jpg';
 
   @override
   void deactivate() {
     super.deactivate();
-    print('MyScene deactivate');
+    print('MyPage deactivate');
   }
 
   @override

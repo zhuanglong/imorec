@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'package:imorec/widget/web_view_scene.dart';
+import 'package:imorec/widget/web_view_widget.dart';
 
 class AppNavigator {
   static push(BuildContext context, Widget scene) {
@@ -16,7 +16,7 @@ class AppNavigator {
     Navigator.push(
       context,
       CupertinoPageRoute(builder: (context) {
-        return WebViewScene(url: url, title: title);
+        return WebViewWidget(url: url, title: title);
       }),
     );
   }
