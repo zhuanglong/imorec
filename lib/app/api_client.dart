@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:async';
 
 import 'package:dio/dio.dart';
+import 'package:dio/adapter.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:html/parser.dart' show parse;
 import 'package:http/http.dart' as http;
@@ -19,10 +20,19 @@ class ApiClient {
       connectTimeout: 10000,
       receiveTimeout: 100000,
       queryParameters: {
-        'apiKey': apiKey
+        'apikey': apiKey
       }
     );
-    return Dio(options);
+    Dio dio = Dio(options);
+
+    // 抓包配置，同时需要打开 charles
+    // (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) {
+    //   client.findProxy = (uri) {
+    //     return 'PROXY 192.168.43.100:8888';
+    //   };
+    // };
+
+    return dio;
   }
 
   Dio dio = ApiClient.createDio();
@@ -43,5 +53,17 @@ class ApiClient {
       });
     });
     return news;
+  }
+
+  // 获取正在上映的电影
+  Future<dynamic> getHottingList({int start, int count}) async {
+    Response<Map> response = await dio.get('in_theaters', queryParameters: {'start': start, 'count': count});
+    return response.data['subjects'];
+  }
+
+  // 获取即将上映的电影
+  Future getComingList({int start, int count}) async {
+    Response<Map> response = await dio.get('coming_soon', queryParameters: {'start': start, 'count': count});
+    return response.data['subjects'];
   }
 }

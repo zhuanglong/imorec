@@ -7,10 +7,10 @@ import 'package:imorec/app/app_navigator.dart';
 import 'package:imorec/modal/movie_news.dart';
 import 'package:imorec/app/app_color.dart';
 
-class NewsBannerView extends StatelessWidget {
+class NewsBannerWidget extends StatelessWidget {
   final List<MovieNews> newsList;
 
-  NewsBannerView(this.newsList);
+  NewsBannerWidget(this.newsList);
 
   @override
   Widget build(BuildContext context) {
