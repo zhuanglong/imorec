@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:imorec/home/home_page.dart';
-import 'package:imorec/my/my_page.dart';
+import 'package:imorec/page/home/home_page.dart';
+import 'package:imorec/page/my/my_page.dart';
 
 import 'package:imorec/app/constant.dart';
 import 'package:imorec/app/app_color.dart';

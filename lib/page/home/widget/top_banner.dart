@@ -6,7 +6,7 @@ import 'package:imorec/app/api_client.dart';
 import 'package:imorec/util/movie_data_util.dart';
 import 'package:palette_generator/palette_generator.dart';
 
-import 'package:imorec/home/widget/section_bar.dart';
+import 'package:imorec/page/home/widget/section_bar.dart';
 import 'package:imorec/modal/movie_item_modal.dart';
 import 'package:imorec/modal/movie_top_banner_modal.dart';
 import 'package:imorec/util/screen.dart';

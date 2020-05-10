@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'package:imorec/home/widget/three_grid.dart';
-import 'package:imorec/home/widget/news_banner.dart';
-import 'package:imorec/home/widget/top_banner.dart';
+import 'package:imorec/page/home/widget/three_grid.dart';
+import 'package:imorec/page/home/widget/news_banner.dart';
+import 'package:imorec/page/home/widget/top_banner.dart';
 import 'package:imorec/app/api_client.dart';
 import 'package:imorec/app/app_color.dart';
 import 'package:imorec/modal/movie_news_modal.dart';
@@ -58,12 +58,8 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
               cacheExtent: 10000,
               children: <Widget>[
                 NewsBanner(_newsList),
-                ThreeGrid(_hottingList, '影院热映', () {
-                  // 'in_theaters'
-                }),
-                ThreeGrid(_comingList, '即将上映', () {
-                  // 'coming_soon'
-                }),
+                ThreeGrid(_hottingList, '影院热映', 'in_theaters'),
+                ThreeGrid(_comingList, '即将上映', 'coming_soon'),
                 TopBanner('电影榜单'),
               ],
             ),

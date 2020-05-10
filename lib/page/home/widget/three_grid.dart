@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:imorec/home/widget/section_bar.dart';
+import 'package:imorec/page/home/widget/section_bar.dart';
 import 'package:imorec/modal/movie_item_modal.dart';
 import 'package:imorec/util/screen.dart';
 import 'package:imorec/app/app_color.dart';
@@ -10,7 +10,7 @@ import 'package:imorec/widget/movie_cover_image_widget.dart';
 class ThreeGrid extends StatelessWidget {
   final List<MovieItemModal> movies;
   final String title;
-  final Function action;
+  final String action;
 
   // 图片的宽度
   final double _coverImageWidth = (Screen.width - 15 * 4) / 3;

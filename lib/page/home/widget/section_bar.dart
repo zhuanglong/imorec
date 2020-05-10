@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 
 class SectionBar extends StatelessWidget {
   final String title;
-  final Function action;
+  final String action;
 
   SectionBar(this.title, [this.action]);
 
@@ -34,7 +34,7 @@ class SectionBar extends StatelessWidget {
           ),
           action != null
               ? GestureDetector(
-                  onTap: action,
+                  onTap: onTap,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
@@ -60,5 +60,9 @@ class SectionBar extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  onTap() {
+
   }
 }
