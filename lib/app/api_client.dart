@@ -102,4 +102,10 @@ class ApiClient {
     Response<Map> response = await dio.get('top250', queryParameters: {'start': start, 'count': count});
     return response.data['subjects'];
   }
+
+  // 获取电影详情
+  Future getMovieDetail(String movieId) async {
+    Response<Map> response = await dio.get('subject/$movieId');
+    return response.data;
+  }
 }

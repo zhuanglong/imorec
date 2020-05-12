@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
+import 'package:imorec/app/app_navigator.dart';
+
 class SectionBar extends StatelessWidget {
   final String title;
   final String action;
@@ -34,18 +36,17 @@ class SectionBar extends StatelessWidget {
           ),
           action != null
               ? GestureDetector(
-                  onTap: onTap,
+                  onTap: () {
+                    AppNavigator.pushMovieList(context, title, action);
+                  },
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      GestureDetector(
-                        onTap: () {},
-                        child: Text(
-                          '全部',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      Text(
+                        '全部',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                       SizedBox(width: 3),
@@ -60,9 +61,5 @@ class SectionBar extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  onTap() {
-
   }
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+
 import 'package:imorec/app/api_client.dart';
 import 'package:imorec/modal/movie_item_modal.dart';
+import 'package:imorec/page/movie_list/widget/movie_list_item.dart';
 
 class MovieListPage extends StatefulWidget {
   final String title;
@@ -55,25 +57,34 @@ class _MovieListPageState extends State<MovieListPage> {
         ),
         elevation: 0,
       ),
-      body: Container(
-        child: ListView.builder(
-          itemCount: _movieList.length,
-          itemBuilder: (BuildContext context, int index) {
-            if (index + 1 == _movieList.length) {
-              return Container(
-                padding: EdgeInsets.all(10),
-                child: Center(
-                  child: Offstage(
-                    offstage: _loaded,
-                    child: CupertinoActivityIndicator(),
-                  ),
+      body: _buildBody()
+    );
+  }
+
+  Widget _buildBody() {
+    if (_movieList.length == 0) {
+      return Center(
+        child: CupertinoActivityIndicator(),
+      );
+    }
+    return Container(
+      child: ListView.builder(
+        itemCount: _movieList.length,
+        itemBuilder: (BuildContext context, int index) {
+          if (index + 1 == _movieList.length) {
+            return Container(
+              padding: EdgeInsets.all(10),
+              child: Center(
+                child: Offstage(
+                  offstage: _loaded,
+                  child: CupertinoActivityIndicator(),
                 ),
-              );
-            }
-            return MovieListItem(_movieList[index], this.widget.action);
-          },
-          controller: _scrollController,
-        ),
+              ),
+            );
+          }
+          return MovieListItem(_movieList[index], this.widget.action);
+        },
+        controller: _scrollController,
       ),
     );
   }
@@ -96,9 +107,10 @@ class _MovieListPageState extends State<MovieListPage> {
         break;
       default:
     }
-    List<MovieItemModal> newMovies = data.map((item) =>
-      MovieItemModal.fromJson(item)
-    );
+    List<MovieItemModal> newMovies = [];
+    data.forEach((item) {
+      newMovies.add(MovieItemModal.fromJson(item));
+    });
     
     setState(() {
       if (newMovies.length == 0) {

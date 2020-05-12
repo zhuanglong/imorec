@@ -1,3 +1,5 @@
+// 电影榜单
+
 import 'package:palette_generator/palette_generator.dart';
 import 'movie_item_modal.dart';
 
