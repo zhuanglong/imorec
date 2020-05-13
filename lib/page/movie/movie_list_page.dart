@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:imorec/app/api_client.dart';
 import 'package:imorec/modal/movie_item_modal.dart';
-import 'package:imorec/page/movie_list/widget/movie_list_item.dart';
+import 'package:imorec/page/movie/widget/movie_list_item.dart';
 
 class MovieListPage extends StatefulWidget {
   final String title;
@@ -57,7 +57,7 @@ class _MovieListPageState extends State<MovieListPage> {
         ),
         elevation: 0,
       ),
-      body: _buildBody()
+      body: _buildBody(),
     );
   }
 

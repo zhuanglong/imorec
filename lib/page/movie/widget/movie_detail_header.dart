@@ -10,11 +10,11 @@ import 'package:imorec/widget/movie_cover_image_widget.dart';
 import 'package:imorec/widget/rating_widget.dart';
 import 'package:imorec/page/movie/widget/join_string.dart';
 
-class MovieDetialHeader extends StatelessWidget {
+class MovieDetailHeader extends StatelessWidget {
   final MovieDetailModal movieDetail;
   final Color coverColor;
 
-  MovieDetialHeader(this.movieDetail, this.coverColor);
+  MovieDetailHeader(this.movieDetail, this.coverColor);
 
   @override
   Widget build(BuildContext context) {

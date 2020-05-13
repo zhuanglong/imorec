@@ -31,3 +31,12 @@ String countries2String(List countries) {
   });
   return sb.toString();
 }
+
+String number2Unit(int number) {
+  double n;
+  if (number >= 1000) {
+    n = number / 1000;
+    return n.toStringAsFixed(1) + 'k';
+  }
+  return number.toString();
+}

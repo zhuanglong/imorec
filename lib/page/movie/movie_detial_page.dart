@@ -5,10 +5,17 @@ import 'package:flutter/services.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:palette_generator/palette_generator.dart';
 
+import 'package:imorec/page/movie/widget/movie_detail_cast.dart';
+import 'package:imorec/page/movie/widget/movie_detail_comment.dart';
+import 'package:imorec/page/movie/widget/movie_photos.dart';
+import 'package:imorec/page/movie/widget/movie_summary.dart';
+
 import 'package:imorec/app/api_client.dart';
 import 'package:imorec/app/app_color.dart';
 import 'package:imorec/modal/movie_detail_modal.dart';
 import 'package:imorec/util/screen.dart';
+import 'package:imorec/page/movie/widget/movie_detail_header.dart';
+import 'package:imorec/page/movie/widget/movie_detail_tag.dart';
 
 class MovieDetialPage extends StatefulWidget {
   final String id;
@@ -21,9 +28,8 @@ class MovieDetialPage extends StatefulWidget {
 
 class _MovieDetialPageState extends State<MovieDetialPage> {
   MovieDetailModal _movieDetail;
-  double _navAlpha;
+  double _navAlpha = 0;
   Color _pageColor = AppColor.white;
-  bool _isSummaryUnfold = false;
   ScrollController _scrollController = ScrollController();
 
   @override
@@ -79,7 +85,12 @@ class _MovieDetialPageState extends State<MovieDetialPage> {
                     controller: _scrollController,
                     padding: EdgeInsets.only(top: 0),
                     children: <Widget>[
-
+                      MovieDetailHeader(_movieDetail, _pageColor),
+                      MovieDetailTag(_movieDetail.tags),
+                      MovieSummary(_movieDetail.summary),
+                      MovieDetailCast(_movieDetail.directors, _movieDetail.casts),
+                      MoviePhotos('预告片 / 剧照', _movieDetail.trailers, _movieDetail.photos, _movieDetail.id, onMorePhotos),
+                      MovieDetailComment(_movieDetail.comments),
                     ],
                   ),
                 ),
@@ -141,14 +152,11 @@ class _MovieDetialPageState extends State<MovieDetialPage> {
   back() {
     Navigator.pop(context);
   }
-
-  // 展开收起
-  changeSummaryMaxLines() {
-    setState(() {
-      _isSummaryUnfold = !_isSummaryUnfold;
-    });
-  }
   
+  onMorePhotos() {
+
+  }
+
   Future _fetchData() async {
     ApiClient client = ApiClient();
     MovieDetailModal data = MovieDetailModal.fromJson(
