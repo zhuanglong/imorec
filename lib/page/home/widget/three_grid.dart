@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:imorec/app/app_navigator.dart';
 
 import 'package:imorec/page/home/widget/section_bar.dart';
 import 'package:imorec/modal/movie_item_modal.dart';
@@ -23,10 +24,10 @@ class ThreeGrid extends StatelessWidget {
 
     switch(title) {
       case '影院热映':
-        children = movies.map((movie) => _buildHotting(movie)).toList();
+        children = movies.map((movie) => _buildHotting(context, movie)).toList();
         break;
       case '即将上映':
-        children = movies.map((movie) => _buildComing(movie)).toList();
+        children = movies.map((movie) => _buildComing(context, movie)).toList();
         break;
     }
 
@@ -48,9 +49,11 @@ class ThreeGrid extends StatelessWidget {
     );
   }
 
-  Widget _buildCoverWithTitle({MovieItemModal movie, Widget child, onTap}) {
+  Widget _buildCoverWithTitle(BuildContext context, {MovieItemModal movie, Widget child}) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        AppNavigator.pushMovieDetail(context, movie.id);
+      },
       child: Container(
         width: _coverImageWidth,
         child: Column(
@@ -75,12 +78,10 @@ class ThreeGrid extends StatelessWidget {
     );
   }
 
-  Widget _buildHotting(MovieItemModal movie) {
+  Widget _buildHotting(BuildContext context, MovieItemModal movie) {
     return _buildCoverWithTitle(
+      context,
       movie: movie,
-      onTap: () {
-
-      },
       child: Row(
         children: <Widget>[
           StaticRatingBar(size: 13.0, rate: movie.rating.average / 2),
@@ -97,12 +98,10 @@ class ThreeGrid extends StatelessWidget {
     );
   }
 
-  Widget _buildComing(MovieItemModal movie) {
+  Widget _buildComing(BuildContext context, MovieItemModal movie) {
     return _buildCoverWithTitle(
+      context,
       movie: movie,
-      onTap: () {
-
-      },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[

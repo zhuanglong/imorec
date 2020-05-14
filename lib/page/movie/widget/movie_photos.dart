@@ -14,20 +14,20 @@ const EdgeInsets boxInterval = EdgeInsets.only(left: 15, bottom: 15);
 
 class MoviePhotos extends StatelessWidget {
   final String sectionTitle;
-  final List<MovieTrailerModal> trailer;
+  final List<MovieTrailerModal> trailers;
   final List<MoviePhotoModal> photos;
   final String movieId;
   final VoidCallback onMore;
 
-  MoviePhotos(this.sectionTitle, this.trailer, this.photos, this.movieId, this.onMore);
+  MoviePhotos(this.sectionTitle, this.trailers, this.photos, this.movieId, this.onMore);
 
   @override
   Widget build(BuildContext context) {
     List<Widget> children = [];
     List<String> imageUrls = [];
     List<ImageProvider> providers = [];
-    for (var i = 0; i < trailer.length; i++) {
-      children.add(TrailerItem(trailer[i]));
+    for (var i = 0; i < trailers.length; i++) {
+      children.add(TrailerItem(trailers[i]));
     }
     for (var i = 0; i < photos.length; i++) {
       imageUrls.add(photos[i].image);
@@ -36,7 +36,12 @@ class MoviePhotos extends StatelessWidget {
       children.add(PhotoItem(photos[i], i, providers, imageUrls));
       providers.add(CachedNetworkImageProvider(photos[i].image));
     }
-    children.add(buildShowMore());
+
+    if (children.length == 0) {
+      children.add(buildNull());
+    } else {
+      children.add(buildShowMore());
+    }
 
     return Container(
       child: Column(
@@ -45,7 +50,7 @@ class MoviePhotos extends StatelessWidget {
           Container(
             padding: EdgeInsets.symmetric(horizontal: 15),
             child: Text(
-              '预告片 / 剧照',
+              sectionTitle,
               style: TextStyle(
                 fontSize: fixedFontSize(16),
                 fontWeight: FontWeight.bold,
@@ -62,6 +67,16 @@ class MoviePhotos extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget buildNull() {
+    return Container(
+      padding: EdgeInsets.all(15),
+      child: Text(
+        '暂无相册',
+        style: TextStyle(color: AppColor.white, fontSize: fixedFontSize(14)),
       ),
     );
   }

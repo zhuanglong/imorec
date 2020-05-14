@@ -108,4 +108,10 @@ class ApiClient {
     Response<Map> response = await dio.get('subject/$movieId');
     return response.data;
   }
+
+  // 获取演员
+  Future getActorDetail(String actorId) async {
+    Response<Map> response = await dio.get('celebrity/$actorId');
+    return response.data;
+  }
 }

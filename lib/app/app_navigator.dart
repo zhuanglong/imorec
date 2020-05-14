@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:imorec/page/movie/actor_detial_page.dart';
 
 import 'package:imorec/widget/web_view_widget.dart';
 import 'package:imorec/page/movie/movie_list_page.dart';
@@ -21,6 +22,11 @@ class AppNavigator {
   // 电影详情
   static pushMovieDetail(BuildContext context, String id) {
     AppNavigator.push(context, MovieDetialPage(id: id));
+  }
+
+  // 演员详情
+  static pushActorDetail(BuildContext context, String id) {
+    AppNavigator.push(context, ActorDetialPage(id: id));
   }
 
   // webview
