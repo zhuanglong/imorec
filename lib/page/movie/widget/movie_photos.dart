@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:imorec/app/app_color.dart';
+import 'package:imorec/app/app_navigator.dart';
 import 'package:imorec/modal/movie_photo_modal.dart';
 import 'package:imorec/modal/movie_trailer_modal.dart';
 import 'package:imorec/util/utility.dart';
@@ -119,7 +120,7 @@ class TrailerItem extends StatelessWidget {
       margin: boxInterval,
       child: GestureDetector(
         onTap: () {
-
+           AppNavigator.pushVideoPlay(context, trailer.trailerUrl);
         },
         child: Stack(
           children: <Widget>[
@@ -173,7 +174,7 @@ class PhotoItem extends StatelessWidget {
       margin: boxInterval,
       child: GestureDetector(
         onTap: () {
-
+          AppNavigator.pushPhtotPreview(context, providers, index, imageUrls);
         },
         child: ClipRRect(
           borderRadius: BorderRadius.circular(4),

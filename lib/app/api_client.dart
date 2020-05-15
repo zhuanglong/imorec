@@ -114,4 +114,10 @@ class ApiClient {
     Response<Map> response = await dio.get('celebrity/$actorId');
     return response.data;
   }
+
+  // 获取图片
+  Future getImage(String imageUrl) async {
+    var response = await http.get(imageUrl);
+    return response;
+  }
 }
