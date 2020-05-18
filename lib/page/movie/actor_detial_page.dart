@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:imorec/modal/movie_actor_detail_modal.dart';
@@ -57,7 +56,7 @@ class _ActorDetialPageState extends State<ActorDetialPage> {
 
   @override
   Widget build(BuildContext context) {
-    Screen.updateStatusBarStyle(SystemUiOverlayStyle.light);
+    Screen.updateStatusBarStyle('light');
     if (actorDetail == null) {
       return Scaffold(
         appBar: AppBar(

@@ -25,7 +25,7 @@ class _MyPageState extends State<MyPage> {
 
   @override
   Widget build(BuildContext context) {
-    Screen.updateStatusBarStyle(SystemUiOverlayStyle.light);
+    Screen.updateStatusBarStyle('light');
     return Scaffold(
       body: Container(
         color: AppColor.white,

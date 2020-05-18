@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:palette_generator/palette_generator.dart';
@@ -58,7 +57,7 @@ class _MovieDetialPageState extends State<MovieDetialPage> {
 
   @override
   Widget build(BuildContext context) {
-    Screen.updateStatusBarStyle(SystemUiOverlayStyle.light);
+    Screen.updateStatusBarStyle('light');
     if (_movieDetail == null) {
       return Scaffold(
         appBar: AppBar(

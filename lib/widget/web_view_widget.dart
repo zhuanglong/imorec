@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 
 import 'package:share/share.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
@@ -19,7 +18,7 @@ class WebViewWidget extends StatefulWidget {
 class _WebViewWidgetState extends State<WebViewWidget> {
   @override
   void dispose() {
-    Screen.updateStatusBarStyle(SystemUiOverlayStyle.light);
+    Screen.updateStatusBarStyle('light');
     super.dispose();
   }
 

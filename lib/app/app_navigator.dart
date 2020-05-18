@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:imorec/page/movie/movie_top_list_page.dart';
 
 import 'package:imorec/widget/web_view_widget.dart';
 import 'package:imorec/page/movie/movie_list_page.dart';
@@ -40,6 +41,12 @@ class AppNavigator {
   static pushVideoPlay(BuildContext context, String url) {
     AppNavigator.push(context, MovieVideoPlayPage(url));
   }
+
+  // 电影榜单列表
+  static pushMovieTopList(BuildContext context, String action, String title, String subTitle) {
+    AppNavigator.push(context, MovieTopListPage(action, title, subTitle));
+  }
+
 
   // webview
   static pushWeb(BuildContext context, String url, String title) {

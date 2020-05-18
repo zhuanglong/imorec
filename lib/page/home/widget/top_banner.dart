@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:imorec/app/api_client.dart';
+import 'package:imorec/app/app_navigator.dart';
 import 'package:imorec/util/movie_data_util.dart';
 import 'package:palette_generator/palette_generator.dart';
 
@@ -173,7 +174,9 @@ class _TopBannerState extends State<TopBanner> {
         ),
         items: banners.map((banner) =>
           GestureDetector(
-            onTap: _pushPage,
+            onTap: () {
+              AppNavigator.pushMovieTopList(context, banner.action, banner.title, banner.subTitle);
+            },
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 5),
               child: _buildBannerItem(banner.movies, banner.title, banner.subTitle, banner.coverColor),
@@ -212,9 +215,5 @@ class _TopBannerState extends State<TopBanner> {
         MovieTopBannerModal(usBoxList, '北美电影票房榜', '每周五更新·共10部', 'us_box', paletteGenerator4.darkVibrantColor),
       ];
     });
-  }
-
-  _pushPage() {
-    
   }
 }

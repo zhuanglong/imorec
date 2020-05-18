@@ -35,7 +35,11 @@ class Screen {
     return mediaQuery().padding.bottom;
   }
 
-  static updateStatusBarStyle(SystemUiOverlayStyle style) {
+  static updateStatusBarStyle(String type) {
+    SystemUiOverlayStyle style = SystemUiOverlayStyle.light;
+    if (type == 'dark') {
+      style = SystemUiOverlayStyle.dark;
+    }
     return SystemChrome.setSystemUIOverlayStyle(style);
   }
 }
