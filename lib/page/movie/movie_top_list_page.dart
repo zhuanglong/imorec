@@ -5,14 +5,14 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
 
-import 'package:imorec/app/api_client.dart';
-import 'package:imorec/app/app_color.dart';
-import 'package:imorec/app/app_scene.dart';
+import 'package:imorec/app.dart' show routeObserver;
+import 'package:imorec/common/api/api_service.dart';
+import 'package:imorec/common/style/app_style.dart';
 import 'package:imorec/modal/movie_item_modal.dart';
 import 'package:imorec/page/movie/widget/movie_list_item.dart';
 import 'package:imorec/page/movie/widget/movie_top_item.dart';
 import 'package:imorec/util/movie_data_util.dart';
-import 'package:imorec/util/screen.dart';
+import 'package:imorec/util/screen_util.dart';
 
 class MovieTopListPage extends StatefulWidget {
   final String action;
@@ -34,8 +34,8 @@ class _MovieTopListPageState extends State<MovieTopListPage> with RouteAware {
   int start = 0;
   int count = 25;
 
-  double coverWidth = Screen.width;
-  double coverHeight = 218 + Screen.topSafeHeight;
+  double coverWidth = ScreenUtil.width;
+  double coverHeight = 218 + ScreenUtil.topSafeHeight;
 
   @override
   void initState() {
@@ -107,9 +107,9 @@ class _MovieTopListPageState extends State<MovieTopListPage> with RouteAware {
 
   updateStatusBar() {
     if (navAlpha == 1) {
-      Screen.updateStatusBarStyle('dark');
+      ScreenUtil.updateStatusBarStyle('dark');
     } else {
-      Screen.updateStatusBarStyle('light');
+      ScreenUtil.updateStatusBarStyle('light');
     }
   }
 
@@ -118,19 +118,19 @@ class _MovieTopListPageState extends State<MovieTopListPage> with RouteAware {
 
     var data;
     String action = this.widget.action;
-    ApiClient client = ApiClient();
+    ApiService apiService = ApiService();
     switch (action) {
       case 'weekly':
-        data = await client.getWeeklyList();
+        data = await apiService.getWeeklyList();
         break;
       case 'new_movies':
-        data = await client.getNewMovieList();
+        data = await apiService.getNewMovieList();
         break;
       case 'us_box':
-        data = await client.getUsBoxList();
+        data = await apiService.getUsBoxList();
         break;
       case 'top250':
-        data = await client.getTop250List(start: start, count: count);
+        data = await apiService.getTop250List(start: start, count: count);
         break;
       default:
         break;
@@ -197,8 +197,8 @@ class _MovieTopListPageState extends State<MovieTopListPage> with RouteAware {
       children: <Widget>[
         Container(
           width: 44,
-          height: Screen.navigationBarHeight,
-          padding: EdgeInsets.fromLTRB(5, Screen.topSafeHeight, 0, 0),
+          height: ScreenUtil.navigationBarHeight,
+          padding: EdgeInsets.fromLTRB(5, ScreenUtil.topSafeHeight, 0, 0),
           child: GestureDetector(
             onTap: onBack,
             child: Image.asset('images/icon_arrow_back_white.png'),
@@ -208,8 +208,8 @@ class _MovieTopListPageState extends State<MovieTopListPage> with RouteAware {
           opacity: navAlpha,
           child: Container(
             color: AppColor.white,
-            height: Screen.navigationBarHeight,
-            padding: EdgeInsets.fromLTRB(5, Screen.topSafeHeight, 0, 0),
+            height: ScreenUtil.navigationBarHeight,
+            padding: EdgeInsets.fromLTRB(5, ScreenUtil.topSafeHeight, 0, 0),
             child: Row(
               children: <Widget>[
                 Container(

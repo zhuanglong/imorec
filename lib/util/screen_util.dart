@@ -2,37 +2,37 @@ import 'dart:ui' as ui show window;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-MediaQueryData mediaQuery() {
-  return MediaQueryData.fromWindow(ui.window);
-}
+class ScreenUtil {
+  static get mediaQuery {
+    return MediaQueryData.fromWindow(ui.window);
+  }
 
-class Screen {
   static double get width {
-    return mediaQuery().size.width;
+    return mediaQuery.size.width;
   }
 
   static double get height {
-    return mediaQuery().size.height;
+    return mediaQuery.size.height;
   }
 
   static double get scale {
-    return mediaQuery().devicePixelRatio;
+    return mediaQuery.devicePixelRatio;
   }
 
   static double get textScaleFactor {
-    return mediaQuery().textScaleFactor;
+    return mediaQuery.textScaleFactor;
   }
 
   static double get navigationBarHeight {
-    return mediaQuery().padding.top + kToolbarHeight;
+    return mediaQuery.padding.top + kToolbarHeight;
   }
 
   static double get topSafeHeight {
-    return mediaQuery().padding.top;
+    return mediaQuery.padding.top;
   }
 
   static double get bottomSafeHeight {
-    return mediaQuery().padding.bottom;
+    return mediaQuery.padding.bottom;
   }
 
   static updateStatusBarStyle(String type) {

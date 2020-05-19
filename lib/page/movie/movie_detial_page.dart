@@ -8,13 +8,13 @@ import 'package:imorec/page/movie/widget/movie_detail_cast.dart';
 import 'package:imorec/page/movie/widget/movie_detail_comment.dart';
 import 'package:imorec/page/movie/widget/movie_photos.dart';
 import 'package:imorec/page/movie/widget/movie_summary.dart';
-
-import 'package:imorec/app/api_client.dart';
-import 'package:imorec/app/app_color.dart';
-import 'package:imorec/modal/movie_detail_modal.dart';
-import 'package:imorec/util/screen.dart';
 import 'package:imorec/page/movie/widget/movie_detail_header.dart';
 import 'package:imorec/page/movie/widget/movie_detail_tag.dart';
+import 'package:imorec/common/api/api_service.dart';
+import 'package:imorec/common/style/app_style.dart';
+import 'package:imorec/modal/movie_detail_modal.dart';
+import 'package:imorec/util/screen_util.dart';
+import 'package:imorec/util/toast.dart';
 
 class MovieDetialPage extends StatefulWidget {
   final String id;
@@ -26,39 +26,64 @@ class MovieDetialPage extends StatefulWidget {
 }
 
 class _MovieDetialPageState extends State<MovieDetialPage> {
-  MovieDetailModal _movieDetail;
-  double _navAlpha = 0;
-  Color _pageColor = AppColor.white;
-  ScrollController _scrollController = ScrollController();
+  MovieDetailModal movieDetail;
+  double navAlpha = 0;
+  Color pageColor = AppColor.white;
+  ScrollController scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
-    _fetchData();
-    _scrollController.addListener(() {
-      var offset = _scrollController.offset;
+    fetchData();
+    scrollController.addListener(() {
+      var offset = scrollController.offset;
       if (offset < 0) {
-        if (_navAlpha != 0) {
+        if (navAlpha != 0) {
           setState(() {
-            _navAlpha = 0;
+            navAlpha = 0;
           });
         }
       } else if (offset < 50) {
         setState(() {
-          _navAlpha = 1 - (50 - offset) / 50;
+          navAlpha = 1 - (50 - offset) / 50;
         });
-      } else if (_navAlpha != 1) {
+      } else if (navAlpha != 1) {
         setState(() {
-          _navAlpha = 1;
+          navAlpha = 1;
         });
+      }
+    });
+  }
+
+  back() {
+    Navigator.pop(context);
+  }
+  
+  onMorePhotos() {
+    Toast.show('开发中...');
+  }
+
+  Future fetchData() async {
+    ApiService apiService = ApiService();
+    MovieDetailModal data = MovieDetailModal.fromJson(
+      await apiService.getMovieDetail(this.widget.id));
+    PaletteGenerator paletteGenerator = await PaletteGenerator.fromImageProvider(
+      CachedNetworkImageProvider(data.images.small));
+    
+    setState(() {
+      movieDetail = data;
+      if (paletteGenerator.darkVibrantColor != null) {
+        pageColor = paletteGenerator.darkVibrantColor.color;
+      } else {
+        pageColor = Color(0xff35374c);
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    Screen.updateStatusBarStyle('light');
-    if (_movieDetail == null) {
+    ScreenUtil.updateStatusBarStyle('light');
+    if (movieDetail == null) {
       return Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -76,50 +101,50 @@ class _MovieDetialPageState extends State<MovieDetialPage> {
       body: Stack(
         children: <Widget>[
           Container(
-            color: _pageColor,
+            color: pageColor,
             child: Column(
               children: <Widget>[
                 Expanded(
                   child: ListView(
-                    controller: _scrollController,
+                    controller: scrollController,
                     padding: EdgeInsets.only(top: 0),
                     children: <Widget>[
-                      MovieDetailHeader(_movieDetail, _pageColor),
-                      MovieDetailTag(_movieDetail.tags),
-                      MovieSummary(_movieDetail.summary),
-                      MovieDetailCast(_movieDetail.directors, _movieDetail.casts),
-                      MoviePhotos('预告片 / 剧照', _movieDetail.trailers, _movieDetail.photos, _movieDetail.id, onMorePhotos),
-                      MovieDetailComment(_movieDetail.comments),
+                      MovieDetailHeader(movieDetail, pageColor),
+                      MovieDetailTag(movieDetail.tags),
+                      MovieSummary(movieDetail.summary),
+                      MovieDetailCast(movieDetail.directors, movieDetail.casts),
+                      MoviePhotos('预告片 / 剧照', movieDetail.trailers, movieDetail.photos, movieDetail.id, onMorePhotos),
+                      MovieDetailComment(movieDetail.comments),
                     ],
                   ),
                 ),
               ],
             ),
           ),
-          _buildNavigationBar(),
+          buildNavigationBar(),
         ],
       ),
     );
   }
 
-  Widget _buildNavigationBar() {
+  Widget buildNavigationBar() {
     return Stack(
       children: <Widget>[
         Container(
           width: 44,
-          height: Screen.navigationBarHeight,
-          padding: EdgeInsets.fromLTRB(5, Screen.topSafeHeight, 0, 0),
+          height: ScreenUtil.navigationBarHeight,
+          padding: EdgeInsets.fromLTRB(5, ScreenUtil.topSafeHeight, 0, 0),
           child: GestureDetector(
             onTap: back,
             child: Image.asset('images/icon_arrow_back_white.png'),
           ),
         ),
         Opacity(
-          opacity: _navAlpha,
+          opacity: navAlpha,
           child: Container(
-            decoration: BoxDecoration(color: _pageColor),
-            height: Screen.navigationBarHeight,
-            padding: EdgeInsets.fromLTRB(5, Screen.topSafeHeight, 0, 0),
+            decoration: BoxDecoration(color: pageColor),
+            height: ScreenUtil.navigationBarHeight,
+            padding: EdgeInsets.fromLTRB(5, ScreenUtil.topSafeHeight, 0, 0),
             child: Row(
               children: <Widget>[
                 Container(
@@ -131,7 +156,7 @@ class _MovieDetialPageState extends State<MovieDetialPage> {
                 ),
                 Expanded(
                   child: Text(
-                    _movieDetail.title,
+                    movieDetail.title,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppColor.white),
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.ellipsis,
@@ -146,30 +171,5 @@ class _MovieDetialPageState extends State<MovieDetialPage> {
         ),
       ],
     );
-  }
-
-  back() {
-    Navigator.pop(context);
-  }
-  
-  onMorePhotos() {
-
-  }
-
-  Future _fetchData() async {
-    ApiClient client = ApiClient();
-    MovieDetailModal data = MovieDetailModal.fromJson(
-      await client.getMovieDetail(this.widget.id));
-    PaletteGenerator paletteGenerator = await PaletteGenerator.fromImageProvider(
-      CachedNetworkImageProvider(data.images.small));
-    
-    setState(() {
-      _movieDetail = data;
-      if (paletteGenerator.darkVibrantColor != null) {
-        _pageColor = paletteGenerator.darkVibrantColor.color;
-      } else {
-        _pageColor = Color(0xff35374c);
-      }
-    });
   }
 }

@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
 
-import 'package:imorec/app/app_color.dart';
+import 'package:imorec/common/style/app_style.dart';
 import 'package:imorec/modal/movie_detail_modal.dart';
-import 'package:imorec/util/screen.dart';
+import 'package:imorec/util/screen_util.dart';
 import 'package:imorec/util/utility.dart';
+import 'package:imorec/util/movie_data_util.dart';
 import 'package:imorec/widget/movie_cover_image_widget.dart';
 import 'package:imorec/widget/rating_widget.dart';
-import 'package:imorec/page/movie/widget/join_string.dart';
 
 class MovieDetailHeader extends StatelessWidget {
   final MovieDetailModal movieDetail;
@@ -18,8 +18,8 @@ class MovieDetailHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = Screen.width;
-    double heihgt = 218 + Screen.topSafeHeight;
+    double width = ScreenUtil.width;
+    double heihgt = 218 + ScreenUtil.topSafeHeight;
 
     return Container(
       width: width,
@@ -44,7 +44,7 @@ class MovieDetailHeader extends StatelessWidget {
             width: width,
             height: heihgt,
             color: Colors.transparent,
-            padding: EdgeInsets.fromLTRB(15, 54 + Screen.topSafeHeight, 10, 0),
+            padding: EdgeInsets.fromLTRB(15, 54 + ScreenUtil.topSafeHeight, 10, 0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -104,7 +104,7 @@ class MovieDetailHeader extends StatelessWidget {
                       ),
                       SizedBox(height: 10),
                       Text(
-                        '${countries2String(movieDetail.countries)}/${list2String(movieDetail.genres)}/ 上映时间：${list2String(movieDetail.pubdates)}/ 片长：${list2String(movieDetail.durations)}/${actor2String(movieDetail.directors)}/${actor2String(movieDetail.casts)}',
+                        '${MovieDataUtil.countries2String(movieDetail.countries)}/${MovieDataUtil.list2String(movieDetail.genres)}/ 上映时间：${MovieDataUtil.list2String(movieDetail.pubdates)}/ 片长：${MovieDataUtil.list2String(movieDetail.durations)}/${MovieDataUtil.actor2String(movieDetail.directors)}/${MovieDataUtil.actor2String(movieDetail.casts)}',
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(

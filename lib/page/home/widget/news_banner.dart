@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:imorec/app/app_navigator.dart';
 
+import 'package:imorec/util/navigator_util.dart';
 import 'package:imorec/modal/movie_news_modal.dart';
-import 'package:imorec/app/app_color.dart';
+import 'package:imorec/common/style/app_style.dart';
 
 class NewsBanner extends StatelessWidget {
   final List<MovieNewsModal> newsList;
@@ -28,7 +28,7 @@ class NewsBanner extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 0.0, vertical: 5.0),
             child: GestureDetector(
               onTap: () {
-                AppNavigator.pushWeb(context, item.link, item.title);
+                NavigatorUtil.pushWeb(context, item.link, item.title);
               },
               child: Stack(
                 children: <Widget>[

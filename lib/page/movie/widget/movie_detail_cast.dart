@@ -3,9 +3,9 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
 
-import 'package:imorec/app/app_color.dart';
-import 'package:imorec/app/app_navigator.dart';
+import 'package:imorec/common/style/app_style.dart';
 import 'package:imorec/modal/movie_actor_modal.dart';
+import 'package:imorec/util/navigator_util.dart';
 import 'package:imorec/util/toast.dart';
 import 'package:imorec/util/utility.dart';
 
@@ -72,7 +72,7 @@ class _MovieDetailCastState extends State<MovieDetailCast> {
               if (cast.id == null) {
                 Toast.show('暂无该演员信息');
               } else {
-                AppNavigator.pushActorDetail(context, cast.id);
+                NavigatorUtil.pushActorDetail(context, cast.id);
               }
             },
             child: CircleAvatar(

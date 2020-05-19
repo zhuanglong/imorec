@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'package:imorec/app/app_color.dart';
+import 'package:imorec/common/style/app_style.dart';
+import 'package:imorec/util/toast.dart';
 import 'package:imorec/util/utility.dart';
 
 class MovieDetailTag extends StatelessWidget {
@@ -33,7 +34,7 @@ class MovieDetailTag extends StatelessWidget {
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: tags.length,
-              itemBuilder: (BuildContext context, int index) => _buildTag(context, index),
+              itemBuilder: (BuildContext context, int index) => buildTag(context, index),
             ),
           ),
         ],
@@ -41,7 +42,7 @@ class MovieDetailTag extends StatelessWidget {
     );
   }
 
-  Widget _buildTag(BuildContext context, int index) {
+  Widget buildTag(BuildContext context, int index) {
     String tag = tags[index];
     double paddingRight = 0;
     if (index == tags.length - 1) {
@@ -49,7 +50,7 @@ class MovieDetailTag extends StatelessWidget {
     }
     return GestureDetector(
       onTap: () {
-
+        Toast.show('开发中...');
       },
       child: Container(
         padding: EdgeInsets.only(left: 15, right: 5),

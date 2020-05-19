@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'package:imorec/app/app_navigator.dart';
+import 'package:imorec/util/navigator_util.dart';
 
 class SectionBar extends StatelessWidget {
   final String title;
@@ -37,7 +37,7 @@ class SectionBar extends StatelessWidget {
           action != null
               ? GestureDetector(
                   onTap: () {
-                    AppNavigator.pushMovieList(context, title, action);
+                    NavigatorUtil.pushMovieList(context, title, action);
                   },
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,

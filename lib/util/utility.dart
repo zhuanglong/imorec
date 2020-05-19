@@ -1,5 +1,5 @@
-import 'screen.dart';
+import 'package:imorec/util/screen_util.dart';
 
 fixedFontSize(double fontSize) {
-  return fontSize / Screen.textScaleFactor;
+  return fontSize / ScreenUtil.textScaleFactor;
 }

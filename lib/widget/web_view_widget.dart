@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:share/share.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
-import 'package:imorec/util/screen.dart';
+import 'package:imorec/util/screen_util.dart';
 
 class WebViewWidget extends StatefulWidget {
   final String url;
@@ -18,7 +18,7 @@ class WebViewWidget extends StatefulWidget {
 class _WebViewWidgetState extends State<WebViewWidget> {
   @override
   void dispose() {
-    Screen.updateStatusBarStyle('light');
+    ScreenUtil.updateStatusBarStyle('light');
     super.dispose();
   }
 
@@ -30,12 +30,12 @@ class _WebViewWidgetState extends State<WebViewWidget> {
         elevation: 0,
         title: Text(this.widget.title ?? ''),
         leading: GestureDetector(
-          onTap: _onBack,
+          onTap: onBack,
           child: Image.asset('images/icon_arrow_back_black.png'),
         ),
         actions: <Widget>[
           GestureDetector(
-            onTap: _onShare,
+            onTap: onShare,
             child: Image.asset('images/icon_menu_share.png'),
           ),
         ],
@@ -51,11 +51,11 @@ class _WebViewWidgetState extends State<WebViewWidget> {
     );
   }
 
-  _onBack() {
+  onBack() {
     Navigator.pop(context);
   }
 
-  _onShare() {
+  onShare() {
     Share.share(this.widget.url);
   }
 }

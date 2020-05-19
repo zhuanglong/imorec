@@ -7,7 +7,7 @@ import 'package:photo_view/photo_view_gallery.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:share/share.dart';
 
-import 'package:imorec/app/api_client.dart';
+import 'package:imorec/common/api/api_service.dart';
 import 'package:imorec/util/toast.dart';
 
 class MoviePhotoPreviewPage extends StatefulWidget {
@@ -32,14 +32,59 @@ class _MoviePhotoPreviewPageState extends State<MoviePhotoPreviewPage> {
     currentIndex = this.widget.index;
   }
 
+  onBack() {
+    Navigator.pop(context);
+  }
+
   onPageChanged(int index) {
     setState(() {
       currentIndex = index;
     });
   }
 
-  onBack() {
-    Navigator.pop(context);
+  onLongPress(BuildContext context) {
+    showCupertinoModalPopup<String>(
+      context: context,
+      builder: (BuildContext context) => CupertinoActionSheet(
+        actions: <Widget>[
+          CupertinoActionSheetAction(
+            onPressed: () {
+              Share.share(this.widget.imageUrls[currentIndex]);
+            },
+            child: Text('分享图片链接'),
+          ),
+          CupertinoActionSheetAction(
+            onPressed: () {
+              Navigator.pop(context, '保存图片至相册');
+              saveImageToAlbum(this.widget.imageUrls[currentIndex]);
+            },
+            child: Text('保存图片至相册'),
+          ),
+        ],
+        cancelButton: CupertinoActionSheetAction(
+          onPressed: () {
+            Navigator.pop(context, '取消');
+          },
+          child: Text('取消'),
+          isDefaultAction: true,
+        ),
+      ),
+    ).then((String value) {
+      print(value);
+    });
+  }
+
+  Future saveImageToAlbum(String imageUrl) async {
+    Toast.showDartGrey('正在保存...');
+
+    ApiService apiService = ApiService();
+    var response = await apiService.getImage(imageUrl);
+    var filePath = await ImagePickerSaver.saveFile(
+        fileData: response.bodyBytes);
+    var savedFile = File.fromUri(Uri.file(filePath));
+    Future<File>.sync(() => savedFile);
+  
+    Toast.showDartGrey('保存成功');
   }
 
   @override
@@ -89,50 +134,5 @@ class _MoviePhotoPreviewPageState extends State<MoviePhotoPreviewPage> {
         ),
       ),
     );
-  }
-
-  onLongPress(BuildContext context) {
-    showCupertinoModalPopup<String>(
-      context: context,
-      builder: (BuildContext context) => CupertinoActionSheet(
-        actions: <Widget>[
-          CupertinoActionSheetAction(
-            onPressed: () {
-              Share.share(this.widget.imageUrls[currentIndex]);
-            },
-            child: Text('分享图片链接'),
-          ),
-          CupertinoActionSheetAction(
-            onPressed: () {
-              Navigator.pop(context, '保存图片至相册');
-              saveImageToAlbum(this.widget.imageUrls[currentIndex]);
-            },
-            child: Text('保存图片至相册'),
-          ),
-        ],
-        cancelButton: CupertinoActionSheetAction(
-          onPressed: () {
-            Navigator.pop(context, '取消');
-          },
-          child: Text('取消'),
-          isDefaultAction: true,
-        ),
-      ),
-    ).then((String value) {
-      print(value);
-    });
-  }
-
-  Future saveImageToAlbum(String imageUrl) async {
-    Toast.showDartGrey('正在保存...');
-
-    ApiClient client = ApiClient();
-    var response = await client.getImage(imageUrl);
-    var filePath = await ImagePickerSaver.saveFile(
-        fileData: response.bodyBytes);
-    var savedFile = File.fromUri(Uri.file(filePath));
-    Future<File>.sync(() => savedFile);
-  
-    Toast.showDartGrey('保存成功');
   }
 }

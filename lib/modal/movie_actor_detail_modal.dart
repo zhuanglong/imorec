@@ -1,9 +1,10 @@
+// 演员详情
+
 import 'package:imorec/modal/movie_item_modal.dart';
 import 'package:imorec/modal/movie_photo_modal.dart';
 
 import 'movie_image_modal.dart';
 
-// 演员详情
 class MovieActorDetailModal {
   String name;
   String enName;

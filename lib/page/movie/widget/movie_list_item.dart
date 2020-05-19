@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'package:imorec/app/app_color.dart';
-import 'package:imorec/app/app_navigator.dart';
+import 'package:imorec/common/style/app_style.dart';
 import 'package:imorec/modal/movie_item_modal.dart';
 import 'package:imorec/widget/movie_cover_image_widget.dart';
 import 'package:imorec/widget/rating_widget.dart';
-import 'package:imorec/page/movie/widget/join_string.dart';
+import 'package:imorec/util/navigator_util.dart';
+import 'package:imorec/util/movie_data_util.dart';
 
 class MovieListItem extends StatelessWidget {
   final MovieItemModal movie;
@@ -23,7 +23,7 @@ class MovieListItem extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        AppNavigator.pushMovieDetail(context, movie.id);
+        NavigatorUtil.pushMovieDetail(context, movie.id);
       },
       child: Container(
         padding: EdgeInsets.all(spaceWidth),
@@ -73,7 +73,7 @@ class MovieListItem extends StatelessWidget {
                     ),
                     SizedBox(height: 10),
                     Text(
-                      '${movie.year} /${genres2String(movie.genres)}/${actor2String(movie.directors)}/${actor2String(movie.casts)}',
+                      '${movie.year} /${MovieDataUtil.genres2String(movie.genres)}/${MovieDataUtil.actor2String(movie.directors)}/${MovieDataUtil.actor2String(movie.casts)}',
                       style: TextStyle(color: AppColor.grey, fontSize: 14.0),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -85,7 +85,7 @@ class MovieListItem extends StatelessWidget {
             Container(
               width: actionWidth,
               height: height,
-              child: Center(child: _buildAction()),
+              child: Center(child: buildAction()),
             ),
           ],
         ),
@@ -93,7 +93,7 @@ class MovieListItem extends StatelessWidget {
     );
   }
 
-  Widget _buildAction() {
+  Widget buildAction() {
     Widget action;
     String pubdate = movie.mainlandPubdate;
 

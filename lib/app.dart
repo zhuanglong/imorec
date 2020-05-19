@@ -3,29 +3,30 @@ import 'package:flutter/material.dart';
 
 import 'package:imorec/page/home/home_page.dart';
 import 'package:imorec/page/my/my_page.dart';
+import 'package:imorec/common/constant.dart';
+import 'package:imorec/common/style/app_style.dart';
+import 'package:imorec/common/event/event_bus.dart';
 
-import 'package:imorec/app/constant.dart';
-import 'package:imorec/app/app_color.dart';
-import 'package:imorec/util/event_bus.dart';
+final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 
-class RootScene extends StatefulWidget {
+class MyApp extends StatefulWidget {
   final Widget child;
 
-  RootScene({Key key, this.child}) : super(key: key);
+  MyApp({Key key, this.child}) : super(key: key);
 
   @override
-  _RootSceneState createState() => _RootSceneState();
+  _MyAppState createState() => _MyAppState();
 }
 
-class _RootSceneState extends State<RootScene> {
-  int _tabIndex = 0;
+class _MyAppState extends State<MyApp> {
+  int tabIndex = 0;
 
-  List<Image> _tabImages = [
+  List<Image> tabImages = [
     Image.asset('images/tab_home.png'),
     Image.asset('images/tab_my.png'),
   ];
 
-  List<Image> _tabSelectedImages = [
+  List<Image> tabSelectedImages = [
     Image.asset('images/tab_home_selected.png'),
     Image.asset('images/tab_my_selected.png'),
   ];
@@ -35,7 +36,7 @@ class _RootSceneState extends State<RootScene> {
     super.initState();
     eventBus.on(EventToggleTabBarIndex, (arg) {
       setState(() {
-        _tabIndex = arg;
+        tabIndex = arg;
       });
     });
   }
@@ -46,15 +47,40 @@ class _RootSceneState extends State<RootScene> {
     super.dispose();
   }
 
+  Image getTabIcon(int index) {
+    if (index == tabIndex) {
+      return tabSelectedImages[index];
+    } else {
+      return tabImages[index];
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'iMoRec',
+      navigatorObservers: [routeObserver],
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryColor: Colors.white,
+        dividerColor: Color(0xFFEEEEEE),
+        scaffoldBackgroundColor: AppColor.paper,
+        textTheme: TextTheme(
+          body1: TextStyle(color: AppColor.darkGrey),
+        ),
+      ),
+      home: buildRoot(),
+    );
+  }
+
+  Widget buildRoot() {
     return Scaffold(
       body: IndexedStack(
         children: <Widget>[
           HomePage(),
           MyPage(),
         ],
-        index: _tabIndex,
+        index: tabIndex,
       ),
       bottomNavigationBar: CupertinoTabBar(
         backgroundColor: Colors.white,
@@ -62,29 +88,21 @@ class _RootSceneState extends State<RootScene> {
         border: Border(top: BorderSide.none),
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: _getTabIcon(0),
+            icon: getTabIcon(0),
             title: Text('首页'),
           ),
           BottomNavigationBarItem(
-            icon: _getTabIcon(1),
+            icon: getTabIcon(1),
             title: Text('我的'),
           ),
         ],
-        currentIndex: _tabIndex,
+        currentIndex: tabIndex,
         onTap: (index) {
           setState(() {
-            _tabIndex = index;
+            tabIndex = index;
           });
         },
       ),
     );
-  }
-
-  Image _getTabIcon(int index) {
-    if (index == _tabIndex) {
-      return _tabSelectedImages[index];
-    } else {
-      return _tabImages[index];
-    }
   }
 }

@@ -2,10 +2,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:imorec/app/app_scene.dart';
+import 'package:imorec/app.dart';
 
 void main() {
-  runApp(AppScene());
+  runApp(MyApp());
   if (Platform.isAndroid) {
     // 设置沉浸式状态栏
     SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(statusBarColor: Colors.transparent);

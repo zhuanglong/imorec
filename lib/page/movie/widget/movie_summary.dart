@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'package:imorec/app/app_color.dart';
+import 'package:imorec/common/style/app_style.dart';
 import 'package:imorec/util/utility.dart';
 
 class MovieSummary extends StatefulWidget {

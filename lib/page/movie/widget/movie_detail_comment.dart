@@ -3,9 +3,9 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
 
-import 'package:imorec/app/app_color.dart';
+import 'package:imorec/common/style/app_style.dart';
 import 'package:imorec/modal/movie_comment_modal.dart';
-import 'package:imorec/page/movie/widget/join_string.dart';
+import 'package:imorec/util/movie_data_util.dart';
 import 'package:imorec/widget/rating_widget.dart';
 
 const double boxWidth = 160;
@@ -100,7 +100,7 @@ class CommentItem extends StatelessWidget {
             children: <Widget>[
               Icon(Icons.thumb_up, color: AppColor.lightGrey, size: 12),
               SizedBox(width: 5),
-              Text(number2Unit(comment.usefulCount), style: TextStyle(fontSize: 12, color: AppColor.lightGrey)),
+              Text(MovieDataUtil.number2Unit(comment.usefulCount), style: TextStyle(fontSize: 12, color: AppColor.lightGrey)),
             ],
           ),
           SizedBox(height: 15),

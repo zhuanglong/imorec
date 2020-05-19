@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:imorec/app/api_client.dart';
-import 'package:imorec/app/app_navigator.dart';
-import 'package:imorec/util/movie_data_util.dart';
 import 'package:palette_generator/palette_generator.dart';
 
+import 'package:imorec/common/api/api_service.dart';
+import 'package:imorec/common/style/app_style.dart';
+import 'package:imorec/util/navigator_util.dart';
+import 'package:imorec/util/movie_data_util.dart';
+import 'package:imorec/util/screen_util.dart';
 import 'package:imorec/page/home/widget/section_bar.dart';
 import 'package:imorec/modal/movie_item_modal.dart';
 import 'package:imorec/modal/movie_top_banner_modal.dart';
-import 'package:imorec/util/screen.dart';
 import 'package:imorec/widget/rating_widget.dart';
-import 'package:imorec/app/app_color.dart';
 
 class TopBanner extends StatefulWidget {
   final String title;
@@ -30,7 +30,37 @@ class _TopBannerState extends State<TopBanner> {
   @override
   void initState() {
     super.initState();
-    _fetchData();
+    fetchData();
+  }
+
+  Future fetchData() async {
+    ApiService apiService = ApiService();
+    var weeklyData = MovieDataUtil.getMovieList(await apiService.getWeeklyList());
+    var top250Data = MovieDataUtil.getMovieList(await apiService.getTop250List(start: 0, count: 10));
+    var usBoxData = MovieDataUtil.getMovieList(await apiService.getUsBoxList());
+    var newMovieData = MovieDataUtil.getMovieList(await apiService.getNewMovieList());
+    
+    PaletteGenerator paletteGenerator1 = await PaletteGenerator.fromImageProvider(
+        CachedNetworkImageProvider(weeklyData[0].images.small));
+      PaletteGenerator paletteGenerator2 = await PaletteGenerator.fromImageProvider(
+        CachedNetworkImageProvider(top250Data[0].images.small));
+      PaletteGenerator paletteGenerator3 = await PaletteGenerator.fromImageProvider(
+        CachedNetworkImageProvider(newMovieData[0].images.small));
+      PaletteGenerator paletteGenerator4 = await PaletteGenerator.fromImageProvider(
+        CachedNetworkImageProvider(usBoxData[0].images.small));
+
+    setState(() {
+      weeklyList = weeklyData;
+      top250List = top250Data;
+      usBoxList = usBoxData;
+      newMovieList = newMovieData;
+      banners = [
+        MovieTopBannerModal(weeklyList, '一周口碑电影榜', '每周五更新·共10部', 'weekly', paletteGenerator1.darkVibrantColor),
+        MovieTopBannerModal(top250List, '豆瓣电影Top250', '豆瓣榜单·共250部', 'top250', paletteGenerator2.darkVibrantColor),
+        MovieTopBannerModal(newMovieList, '一周新电影榜', '每周五更新·共10部', 'new_movies', paletteGenerator3.darkVibrantColor),
+        MovieTopBannerModal(usBoxList, '北美电影票房榜', '每周五更新·共10部', 'us_box', paletteGenerator4.darkVibrantColor),
+      ];
+    });
   }
 
   @override
@@ -42,7 +72,7 @@ class _TopBannerState extends State<TopBanner> {
           SectionBar(this.widget.title),
           Container(
             padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-            child: _buildBanner(),
+            child: buildBanner(),
           ),
           Container(
             height: 10,
@@ -53,7 +83,7 @@ class _TopBannerState extends State<TopBanner> {
     );
   }
 
-  Widget _buildRank(List<MovieItemModal> movies, int index) {
+  Widget buildRank(List<MovieItemModal> movies, int index) {
     return Container(
       padding: EdgeInsets.fromLTRB(10, 5, 10, 0),
       child: Row(
@@ -83,7 +113,7 @@ class _TopBannerState extends State<TopBanner> {
     );
   }
 
-  Widget _buildBannerItem(List<MovieItemModal> movies, String title, String subTitle, PaletteColor coverColor) {
+  Widget buildBannerItem(List<MovieItemModal> movies, String title, String subTitle, PaletteColor coverColor) {
     final Radius circularValue = Radius.circular(5);
     return Container(
       child: Column(
@@ -145,7 +175,7 @@ class _TopBannerState extends State<TopBanner> {
               ),
               child: ListView.builder(
                 itemCount: 10,
-                itemBuilder: (BuildContext context, int index) => _buildRank(movies, index),
+                itemBuilder: (BuildContext context, int index) => buildRank(movies, index),
               ),
             ),
           ),
@@ -154,7 +184,7 @@ class _TopBannerState extends State<TopBanner> {
     );
   }
 
-  Widget _buildBanner() {
+  Widget buildBanner() {
     if (banners == null) {
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 5),
@@ -162,8 +192,8 @@ class _TopBannerState extends State<TopBanner> {
           color: Color(0xff3E454D),
           borderRadius: BorderRadius.all(Radius.circular(5)),
         ),
-        width: Screen.width,
-        height: Screen.width * 9 / 15,
+        width: ScreenUtil.width,
+        height: ScreenUtil.width * 9 / 15,
       );
     }
     return Container(
@@ -175,45 +205,15 @@ class _TopBannerState extends State<TopBanner> {
         items: banners.map((banner) =>
           GestureDetector(
             onTap: () {
-              AppNavigator.pushMovieTopList(context, banner.action, banner.title, banner.subTitle);
+              NavigatorUtil.pushMovieTopList(context, banner.action, banner.title, banner.subTitle);
             },
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 5),
-              child: _buildBannerItem(banner.movies, banner.title, banner.subTitle, banner.coverColor),
+              child: buildBannerItem(banner.movies, banner.title, banner.subTitle, banner.coverColor),
             ),
           ),
         ).toList(),
       ),
     );
-  }
-
-  Future _fetchData() async {
-    ApiClient client = ApiClient();
-    var weeklyData = MovieDataUtil.getMovieList(await client.getWeeklyList());
-    var top250Data = MovieDataUtil.getMovieList(await client.getTop250List(start: 0, count: 10));
-    var usBoxData = MovieDataUtil.getMovieList(await client.getUsBoxList());
-    var newMovieData = MovieDataUtil.getMovieList(await client.getNewMovieList());
-    
-    PaletteGenerator paletteGenerator1 = await PaletteGenerator.fromImageProvider(
-        CachedNetworkImageProvider(weeklyData[0].images.small));
-      PaletteGenerator paletteGenerator2 = await PaletteGenerator.fromImageProvider(
-        CachedNetworkImageProvider(top250Data[0].images.small));
-      PaletteGenerator paletteGenerator3 = await PaletteGenerator.fromImageProvider(
-        CachedNetworkImageProvider(newMovieData[0].images.small));
-      PaletteGenerator paletteGenerator4 = await PaletteGenerator.fromImageProvider(
-        CachedNetworkImageProvider(usBoxData[0].images.small));
-
-    setState(() {
-      weeklyList = weeklyData;
-      top250List = top250Data;
-      usBoxList = usBoxData;
-      newMovieList = newMovieData;
-      banners = [
-        MovieTopBannerModal(weeklyList, '一周口碑电影榜', '每周五更新·共10部', 'weekly', paletteGenerator1.darkVibrantColor),
-        MovieTopBannerModal(top250List, '豆瓣电影Top250', '豆瓣榜单·共250部', 'top250', paletteGenerator2.darkVibrantColor),
-        MovieTopBannerModal(newMovieList, '一周新电影榜', '每周五更新·共10部', 'new_movies', paletteGenerator3.darkVibrantColor),
-        MovieTopBannerModal(usBoxList, '北美电影票房榜', '每周五更新·共10部', 'us_box', paletteGenerator4.darkVibrantColor),
-      ];
-    });
   }
 }

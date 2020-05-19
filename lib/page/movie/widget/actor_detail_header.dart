@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
 
-import 'package:imorec/app/app_color.dart';
+import 'package:imorec/common/style/app_style.dart';
 import 'package:imorec/modal/movie_actor_detail_modal.dart';
-import 'package:imorec/util/screen.dart';
+import 'package:imorec/util/screen_util.dart';
 
 
 class ActorDetailHeader extends StatelessWidget {
@@ -16,8 +16,8 @@ class ActorDetailHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = Screen.width;
-    double heihgt = 218 + Screen.topSafeHeight;
+    double width = ScreenUtil.width;
+    double heihgt = 218 + ScreenUtil.topSafeHeight;
 
     return Container(
       width: width,
@@ -44,7 +44,7 @@ class ActorDetailHeader extends StatelessWidget {
               child: Container(
                 width: width,
                 height: heihgt,
-                padding: EdgeInsets.only(top: Screen.topSafeHeight),
+                padding: EdgeInsets.only(top: ScreenUtil.topSafeHeight),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[

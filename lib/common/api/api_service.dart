@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:imorec/modal/movie_news_modal.dart';
 
-class ApiClient {
+class ApiService {
   static const String baseUrl = 'http://api.douban.com/v2/movie/';
   static const String apiKey = '0b2bdeda43b5688921839c8ecb20399b';
   static const String webUrl = 'https://movie.douban.com/';
@@ -37,7 +37,7 @@ class ApiClient {
     return dio;
   }
 
-  Dio dio = ApiClient.createDio();
+  Dio dio = ApiService.createDio();
 
   // 获取首页热门新闻文章
   Future<List<MovieNewsModal>> getNewsList() async {

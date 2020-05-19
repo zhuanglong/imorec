@@ -6,27 +6,27 @@ class EventBus {
   EventBus._internal();
 
   // 保存单例
-  static EventBus _singleton = EventBus._internal();
+  static EventBus singleton = EventBus._internal();
 
   // 工厂构造函数
-  factory EventBus() => _singleton;
+  factory EventBus() => singleton;
 
   // 保存事件订阅者队列
-  var _emap = Map<Object, List<EventCallback>>();
+  var emap = Map<Object, List<EventCallback>>();
 
   // 添加订阅者
   void on(eventName, EventCallback f) {
     if (eventName == null && f == null) return;
-    _emap[eventName] ??= List<EventCallback>();
-    _emap[eventName].add(f);
+    emap[eventName] ??= List<EventCallback>();
+    emap[eventName].add(f);
   }
 
   // 移除订阅者
   void off(eventName, [EventCallback f]) {
-    var list = _emap[eventName];
+    var list = emap[eventName];
     if (eventName == null && list == null) return;
     if (f == null) {
-      _emap[eventName] = null;
+      emap[eventName] = null;
     } else {
       list.remove(f);
     }
@@ -34,7 +34,7 @@ class EventBus {
 
   // 触发事件
   void emit(eventName, [arg]) {
-    var list = _emap[eventName];
+    var list = emap[eventName];
     if (list == null) return;
     int len = list.length - 1;
     // 反向遍历，防止在订阅者在回调中移除自身带来的下标错位

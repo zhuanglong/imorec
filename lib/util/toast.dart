@@ -1,6 +1,6 @@
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
-import 'package:imorec/app/app_color.dart';
+import 'package:imorec/common/style/app_style.dart';
 
 class Toast {
   static show(String msg) {

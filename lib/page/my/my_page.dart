@@ -4,9 +4,9 @@ import 'package:flutter/services.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
 
-import 'package:imorec/app/app_navigator.dart';
-import 'package:imorec/app/app_color.dart';
-import 'package:imorec/util/screen.dart';
+import 'package:imorec/common/style/app_style.dart';
+import 'package:imorec/util/navigator_util.dart';
+import 'package:imorec/util/screen_util.dart';
 import 'package:imorec/util/toast.dart';
 
 class MyPage extends StatefulWidget {
@@ -18,46 +18,40 @@ class _MyPageState extends State<MyPage> {
   String _avatarUrl = 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3454574876,1377139334&fm=27&gp=0.jpg';
 
   @override
-  void deactivate() {
-    super.deactivate();
-    print('MyPage deactivate');
-  }
-
-  @override
   Widget build(BuildContext context) {
-    Screen.updateStatusBarStyle('light');
+    ScreenUtil.updateStatusBarStyle('light');
     return Scaffold(
       body: Container(
         color: AppColor.white,
-        height: Screen.height,
-        width: Screen.width,
+        height: ScreenUtil.height,
+        width: ScreenUtil.width,
         child: ListView(
           padding: EdgeInsets.only(top: 0),
           children: <Widget>[
-            _buildHeader(),
-            _buildItem('images/icon_github.png', '项目地址', _openGithub),
-            _buildItem('images/icon_qq.png', 'Flutter 技术群', _copyQQNumber),
-            _buildItem('images/icon_API.png', 'API 文档', _openApi),
+            buildHeader(),
+            buildItem('images/icon_github.png', '项目地址', openGithub),
+            buildItem('images/icon_qq.png', 'Flutter 技术群', copyQQNumber),
+            buildItem('images/icon_API.png', 'API 文档', openApi),
           ],
         ),
       ),
     );
   }
 
-  _copyQQNumber() {
-    Clipboard.setData(ClipboardData(text: '693338726'));
+  copyQQNumber() {
+    Clipboard.setData(ClipboardData(text: '123xxxxx'));
     Toast.show('已复制 QQ 群号');
   }
 
-  _openApi() {
-    AppNavigator.pushWeb(context, 'https://github.com/Mayandev/morec/blob/master/API.md', 'Api');
+  openApi() {
+    NavigatorUtil.pushWeb(context, 'https://github.com/Mayandev/morec/blob/master/API.md', 'Api');
   }
 
-  _openGithub() {
-    AppNavigator.pushWeb(context, 'https://github.com/Mayandev/morec', 'Morec');
+  openGithub() {
+    NavigatorUtil.pushWeb(context, 'https://github.com/zhuanglong/imorec', 'Morec');
   }
 
-  Widget _buildItem(String icon, String text, onTap) {
+  Widget buildItem(String icon, String text, onTap) {
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -96,8 +90,8 @@ class _MyPageState extends State<MyPage> {
     );
   }
 
-  Widget _buildHeader() {
-    double width = Screen.width;
+  Widget buildHeader() {
+    double width = ScreenUtil.width;
     double height = 250;
     return ClipRect(
       child: Stack(
