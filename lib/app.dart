@@ -58,15 +58,14 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'iMoRec',
       navigatorObservers: [routeObserver],
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false, // 去除右上角的 Debug 标签
       theme: ThemeData(
         primaryColor: Colors.white,
         dividerColor: Color(0xFFEEEEEE),
         scaffoldBackgroundColor: AppColor.paper,
         textTheme: TextTheme(
-          body1: TextStyle(color: AppColor.darkGrey),
+          bodyText1: TextStyle(color: AppColor.darkGrey),
         ),
       ),
       home: buildRoot(),
