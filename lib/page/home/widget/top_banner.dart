@@ -192,8 +192,8 @@ class _TopBannerState extends State<TopBanner> {
           color: Color(0xff3E454D),
           borderRadius: BorderRadius.all(Radius.circular(5)),
         ),
-        width: ScreenUtil.width,
-        height: ScreenUtil.width * 9 / 15,
+        width: ScreenUtil.width(context),
+        height: ScreenUtil.width(context) * 9 / 15,
       );
     }
     return Container(

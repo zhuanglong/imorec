@@ -1,39 +1,25 @@
-import 'dart:ui' as ui show window;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+// https://medium.com/gskinner-team/flutter-simplify-platform-screen-size-detection-4cb6fc4f7ed1
 class ScreenUtil {
-  static get mediaQuery {
-    return MediaQueryData.fromWindow(ui.window);
-  }
+  static Size size(BuildContext context) => MediaQuery.of(context).size;
 
-  static double get width {
-    return mediaQuery.size.width;
-  }
+  static double width(BuildContext context) => size(context).width;
 
-  static double get height {
-    return mediaQuery.size.height;
-  }
+  static double height(BuildContext context) => size(context).height;
 
-  static double get scale {
-    return mediaQuery.devicePixelRatio;
-  }
+  static double topSafeHeight(BuildContext context) => MediaQuery.of(context).padding.top;
 
-  static double get textScaleFactor {
-    return mediaQuery.textScaleFactor;
-  }
+  static double bottomSafeHeight(BuildContext context) => MediaQuery.of(context).padding.bottom;
 
-  static double get navigationBarHeight {
-    return mediaQuery.padding.top + kToolbarHeight;
-  }
+  static double navigationBarHeight(BuildContext context) => topSafeHeight(context) + kToolbarHeight;
 
-  static double get topSafeHeight {
-    return mediaQuery.padding.top;
-  }
+  static bool isLandscape(BuildContext context) => MediaQuery.of(context).orientation == Orientation.landscape;
+  
+  static double scale(BuildContext context) => MediaQuery.of(context).devicePixelRatio;
 
-  static double get bottomSafeHeight {
-    return mediaQuery.padding.bottom;
-  }
+  static double textScaleFactor(BuildContext context) => MediaQuery.of(context).textScaleFactor;
 
   static updateStatusBarStyle(String type) {
     SystemUiOverlayStyle style = SystemUiOverlayStyle.light;

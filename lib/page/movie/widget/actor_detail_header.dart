@@ -16,8 +16,8 @@ class ActorDetailHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = ScreenUtil.width;
-    double heihgt = 218 + ScreenUtil.topSafeHeight;
+    double width = ScreenUtil.width(context);
+    double heihgt = 218 + ScreenUtil.topSafeHeight(context);
 
     return Container(
       width: width,
@@ -44,7 +44,7 @@ class ActorDetailHeader extends StatelessWidget {
               child: Container(
                 width: width,
                 height: heihgt,
-                padding: EdgeInsets.only(top: ScreenUtil.topSafeHeight),
+                padding: EdgeInsets.only(top: ScreenUtil.topSafeHeight(context)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[

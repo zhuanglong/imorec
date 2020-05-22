@@ -1,5 +1,6 @@
-import 'package:imorec/util/screen_util.dart';
+import 'dart:ui' as ui;
+import 'package:flutter/cupertino.dart';
 
 fixedFontSize(double fontSize) {
-  return fontSize / ScreenUtil.textScaleFactor;
+  return fontSize / MediaQueryData.fromWindow(ui.window).textScaleFactor;
 }

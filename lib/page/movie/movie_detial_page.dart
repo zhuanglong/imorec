@@ -132,8 +132,8 @@ class _MovieDetialPageState extends State<MovieDetialPage> {
       children: <Widget>[
         Container(
           width: 44,
-          height: ScreenUtil.navigationBarHeight,
-          padding: EdgeInsets.fromLTRB(5, ScreenUtil.topSafeHeight, 0, 0),
+          height: ScreenUtil.navigationBarHeight(context),
+          padding: EdgeInsets.fromLTRB(5, ScreenUtil.topSafeHeight(context), 0, 0),
           child: GestureDetector(
             onTap: back,
             child: Image.asset('images/icon_arrow_back_white.png'),
@@ -143,8 +143,8 @@ class _MovieDetialPageState extends State<MovieDetialPage> {
           opacity: navAlpha,
           child: Container(
             decoration: BoxDecoration(color: pageColor),
-            height: ScreenUtil.navigationBarHeight,
-            padding: EdgeInsets.fromLTRB(5, ScreenUtil.topSafeHeight, 0, 0),
+            height: ScreenUtil.navigationBarHeight(context),
+            padding: EdgeInsets.fromLTRB(5, ScreenUtil.topSafeHeight(context), 0, 0),
             child: Row(
               children: <Widget>[
                 Container(

@@ -13,9 +13,6 @@ class ThreeGrid extends StatelessWidget {
   final String title;
   final String action;
 
-  // 图片的宽度
-  final double coverImageWidth = (ScreenUtil.width - 15 * 4) / 3;
-
   ThreeGrid(this.movies, this.title, this.action);
 
   @override
@@ -50,6 +47,7 @@ class ThreeGrid extends StatelessWidget {
   }
 
   Widget buildCoverWithTitle(BuildContext context, {MovieItemModal movie, Widget child}) {
+    final double coverImageWidth = (ScreenUtil.width(context) - 15 * 4) / 3;
     return GestureDetector(
       onTap: () {
         NavigatorUtil.pushMovieDetail(context, movie.id);

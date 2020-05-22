@@ -34,9 +34,6 @@ class _MovieTopListPageState extends State<MovieTopListPage> with RouteAware {
   int start = 0;
   int count = 25;
 
-  double coverWidth = ScreenUtil.width;
-  double coverHeight = 218 + ScreenUtil.topSafeHeight;
-
   @override
   void initState() {
     super.initState();
@@ -197,8 +194,8 @@ class _MovieTopListPageState extends State<MovieTopListPage> with RouteAware {
       children: <Widget>[
         Container(
           width: 44,
-          height: ScreenUtil.navigationBarHeight,
-          padding: EdgeInsets.fromLTRB(5, ScreenUtil.topSafeHeight, 0, 0),
+          height: ScreenUtil.navigationBarHeight(context),
+          padding: EdgeInsets.fromLTRB(5, ScreenUtil.topSafeHeight(context), 0, 0),
           child: GestureDetector(
             onTap: onBack,
             child: Image.asset('images/icon_arrow_back_white.png'),
@@ -208,8 +205,8 @@ class _MovieTopListPageState extends State<MovieTopListPage> with RouteAware {
           opacity: navAlpha,
           child: Container(
             color: AppColor.white,
-            height: ScreenUtil.navigationBarHeight,
-            padding: EdgeInsets.fromLTRB(5, ScreenUtil.topSafeHeight, 0, 0),
+            height: ScreenUtil.navigationBarHeight(context),
+            padding: EdgeInsets.fromLTRB(5, ScreenUtil.topSafeHeight(context), 0, 0),
             child: Row(
               children: <Widget>[
                 Container(
@@ -238,6 +235,8 @@ class _MovieTopListPageState extends State<MovieTopListPage> with RouteAware {
   }
 
   Widget buildHeader() {
+    double coverWidth = ScreenUtil.width(context);
+    double coverHeight = 218 + ScreenUtil.topSafeHeight(context);
     return Container(
       width: coverWidth,
       height: coverHeight,

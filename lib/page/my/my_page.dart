@@ -23,8 +23,8 @@ class _MyPageState extends State<MyPage> {
     return Scaffold(
       body: Container(
         color: AppColor.white,
-        height: ScreenUtil.height,
-        width: ScreenUtil.width,
+        height: ScreenUtil.height(context),
+        width: ScreenUtil.width(context),
         child: ListView(
           padding: EdgeInsets.only(top: 0),
           children: <Widget>[
@@ -91,7 +91,7 @@ class _MyPageState extends State<MyPage> {
   }
 
   Widget buildHeader() {
-    double width = ScreenUtil.width;
+    double width = ScreenUtil.width(context);
     double height = 250;
     return ClipRect(
       child: Stack(

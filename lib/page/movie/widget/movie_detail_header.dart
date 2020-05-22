@@ -18,8 +18,8 @@ class MovieDetailHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = ScreenUtil.width;
-    double heihgt = 218 + ScreenUtil.topSafeHeight;
+    double width = ScreenUtil.width(context);
+    double heihgt = 218 + ScreenUtil.topSafeHeight(context);
 
     return Container(
       width: width,
@@ -44,7 +44,7 @@ class MovieDetailHeader extends StatelessWidget {
             width: width,
             height: heihgt,
             color: Colors.transparent,
-            padding: EdgeInsets.fromLTRB(15, 54 + ScreenUtil.topSafeHeight, 10, 0),
+            padding: EdgeInsets.fromLTRB(15, 54 + ScreenUtil.topSafeHeight(context), 10, 0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
