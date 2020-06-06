@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'package:imorec/common/style/app_style.dart';
 import 'package:imorec/util/utility.dart';
 
 class MovieSummary extends StatefulWidget {
@@ -28,7 +27,7 @@ class _MovieSummaryState extends State<MovieSummary> {
             style: TextStyle(
               fontSize: fixedFontSize(16),
               fontWeight: FontWeight.bold,
-              color: AppColor.white,
+              color: Colors.white,
             ),
           ),
           SizedBox(height: 10),
@@ -37,7 +36,7 @@ class _MovieSummaryState extends State<MovieSummary> {
             maxLines: isUnfold ? null : 4,
             style: TextStyle(
               fontSize: fixedFontSize(14),
-              color: AppColor.white,
+              color: Colors.white,
             ),
           ),
           SizedBox(height: 5),
@@ -50,12 +49,12 @@ class _MovieSummaryState extends State<MovieSummary> {
                   isUnfold ? '收起' : '显示全部',
                   style: TextStyle(
                     fontSize: fixedFontSize(14),
-                    color: AppColor.white,
+                    color: Colors.white,
                   ),
                 ),
                 Icon(
                   isUnfold ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
-                  color: AppColor.white,
+                  color: Colors.white,
                 ),
               ],
             ),

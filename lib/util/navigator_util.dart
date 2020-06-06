@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:imorec/page/movie/movie_top_list_page.dart';
+import 'package:imorec/page/setting/language_page.dart';
+import 'package:imorec/page/setting/theme_page.dart';
 
 import 'package:imorec/widget/web_view_widget.dart';
 import 'package:imorec/page/movie/movie_list_page.dart';
@@ -9,6 +11,7 @@ import 'package:imorec/page/movie/movie_detial_page.dart';
 import 'package:imorec/page/movie/actor_detial_page.dart';
 import 'package:imorec/page/movie/movie_photo_preview_page.dart';
 import 'package:imorec/page/movie/movie_video_play_page.dart';
+import 'package:imorec/page/setting/setting_page.dart';
 
 class NavigatorUtil {
   static push(BuildContext context, Widget scene) {
@@ -16,6 +19,10 @@ class NavigatorUtil {
       context,
       CupertinoPageRoute(builder: (BuildContext context) => scene),
     );
+  }
+
+  static back(BuildContext context) {
+    Navigator.pop(context);
   }
 
   // 电影列表
@@ -48,6 +55,20 @@ class NavigatorUtil {
     NavigatorUtil.push(context, MovieTopListPage(action, title, subTitle));
   }
 
+  // 设置
+  static pushSettingPage(BuildContext context) {
+    NavigatorUtil.push(context, SettingPage());
+  }
+
+  // 主题
+  static pushThemePage(BuildContext context) {
+    NavigatorUtil.push(context, ThemePage());
+  }
+
+  // 语言
+  static pushLanguagePage(BuildContext context) {
+    NavigatorUtil.push(context, LanguagePage());
+  }
 
   // webview
   static pushWeb(BuildContext context, String url, String title) {

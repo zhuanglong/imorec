@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
 
-import 'package:imorec/common/style/app_style.dart';
 import 'package:imorec/modal/movie_photo_modal.dart';
 import 'package:imorec/modal/movie_trailer_modal.dart';
 import 'package:imorec/util/navigator_util.dart';
@@ -55,7 +54,7 @@ class MoviePhotos extends StatelessWidget {
               style: TextStyle(
                 fontSize: fixedFontSize(16),
                 fontWeight: FontWeight.bold,
-                color: AppColor.white,
+                color: Colors.white,
               ),
             ),
           ),
@@ -77,7 +76,7 @@ class MoviePhotos extends StatelessWidget {
       padding: EdgeInsets.all(15),
       child: Text(
         '暂无相册',
-        style: TextStyle(color: AppColor.white, fontSize: fixedFontSize(14)),
+        style: TextStyle(color: Colors.white, fontSize: fixedFontSize(14)),
       ),
     );
   }
@@ -95,12 +94,12 @@ class MoviePhotos extends StatelessWidget {
               '查看更多',
               style: TextStyle(
                 fontSize: 12,
-                color: AppColor.lightGrey,
+                color: Color(0xFFDDDDDD),
               ),
             ),
             Icon(
               Icons.keyboard_arrow_right,
-              color: AppColor.lightGrey,
+              color: Color(0xFFDDDDDD),
             ),
           ],
         ),
@@ -147,7 +146,7 @@ class TrailerItem extends StatelessWidget {
                       color: Colors.black,
                     ),
                     child: Center(
-                      child: Icon(Icons.play_arrow, color:AppColor.white),
+                      child: Icon(Icons.play_arrow, color:Colors.white),
                     ),
                   ),
                 ),

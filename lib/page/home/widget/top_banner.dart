@@ -5,10 +5,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:palette_generator/palette_generator.dart';
 
 import 'package:imorec/common/api/api_service.dart';
-import 'package:imorec/common/style/app_style.dart';
 import 'package:imorec/util/navigator_util.dart';
 import 'package:imorec/util/movie_data_util.dart';
-import 'package:imorec/util/screen_util.dart';
+import 'package:imorec/util/device_util.dart';
 import 'package:imorec/page/home/widget/section_bar.dart';
 import 'package:imorec/modal/movie_item_modal.dart';
 import 'package:imorec/modal/movie_top_banner_modal.dart';
@@ -66,7 +65,6 @@ class _TopBannerState extends State<TopBanner> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
       child: Column(
         children: <Widget>[
           SectionBar(this.widget.title),
@@ -74,10 +72,7 @@ class _TopBannerState extends State<TopBanner> {
             padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
             child: buildBanner(),
           ),
-          Container(
-            height: 10,
-            color: Color(0xFFF5F5F5),
-          ),
+          Container(height: 10),
         ],
       ),
     );
@@ -93,7 +88,7 @@ class _TopBannerState extends State<TopBanner> {
             width: 100,
             child: Text(
               '${index + 1}. ${movies[index].title}',
-              style: TextStyle(color: AppColor.white, fontSize: 12),
+              style: TextStyle(color: Colors.white, fontSize: 12),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
@@ -104,7 +99,7 @@ class _TopBannerState extends State<TopBanner> {
               SizedBox(width: 10),
               Text(
                 '${movies[index].rating.average}',
-                style: TextStyle(color: AppColor.white, fontSize: 12),
+                style: TextStyle(color: Colors.white, fontSize: 12),
               ),
             ],
           ),
@@ -150,12 +145,12 @@ class _TopBannerState extends State<TopBanner> {
                     children: <Widget>[
                       Text(
                         subTitle,
-                        style: TextStyle(color: AppColor.white),
+                        style: TextStyle(color: Colors.white),
                       ),
                       Text(
                         title,
                         style: TextStyle(
-                          color: AppColor.white,
+                          color: Colors.white,
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
                         ),
@@ -192,12 +187,11 @@ class _TopBannerState extends State<TopBanner> {
           color: Color(0xff3E454D),
           borderRadius: BorderRadius.all(Radius.circular(5)),
         ),
-        width: ScreenUtil.width(context),
-        height: ScreenUtil.width(context) * 9 / 15,
+        width: DeviceUtil.width(context),
+        height: DeviceUtil.width(context) * 9 / 15,
       );
     }
     return Container(
-      color: Colors.white,
       child: CarouselSlider(
         options: CarouselOptions(
           aspectRatio: 15 / 9,

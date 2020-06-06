@@ -26,7 +26,6 @@ class MovieTopItem extends StatelessWidget {
     }
 
     return Container(
-      color: Colors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[

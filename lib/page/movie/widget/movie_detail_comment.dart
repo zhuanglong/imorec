@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
 
-import 'package:imorec/common/style/app_style.dart';
 import 'package:imorec/modal/movie_comment_modal.dart';
 import 'package:imorec/util/movie_data_util.dart';
 import 'package:imorec/widget/rating_widget.dart';
@@ -20,7 +19,7 @@ class MovieDetailComment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> children = [];
-    Widget noComment = Text('暂无短评', style: TextStyle(color: AppColor.white, fontSize: 14));
+    Widget noComment = Text('暂无短评', style: TextStyle(color: Colors.white, fontSize: 14));
     for (var i = 0; i < comments.length; i++) {
       children.add(CommentItem(comments[i]));
     }
@@ -38,7 +37,7 @@ class MovieDetailComment extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text('短评', style: TextStyle(fontSize: 16, color: AppColor.white, fontWeight: FontWeight.bold)),
+          Text('短评', style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold)),
           SizedBox(height: 30),
           Column(
             children: children,
@@ -59,7 +58,7 @@ class CommentItem extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(bottom: 15),
       decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(color: AppColor.grey, width: 0.5)),
+        border: Border(bottom: BorderSide(color: Color(0xFF888888), width: 0.5)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,7 +75,7 @@ class CommentItem extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     comment.author.name,
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColor.white),
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white),
                   ),
                   SizedBox(height: 3),
                   Row(
@@ -85,7 +84,7 @@ class CommentItem extends StatelessWidget {
                       SizedBox(width: 10),
                       Text(
                         comment.time.split(' ')[0],
-                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: AppColor.lightGrey),
+                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFFDDDDDD)),
                       ),
                     ],
                   ),
@@ -94,13 +93,13 @@ class CommentItem extends StatelessWidget {
             ],
           ),
           SizedBox(height: 15),
-          Text(comment.content, style: TextStyle(fontSize: 14, color: AppColor.white)),
+          Text(comment.content, style: TextStyle(fontSize: 14, color: Colors.white)),
           SizedBox(height: 15),
           Row(
             children: <Widget>[
-              Icon(Icons.thumb_up, color: AppColor.lightGrey, size: 12),
+              Icon(Icons.thumb_up, color: Color(0xFFDDDDDD), size: 12),
               SizedBox(width: 5),
-              Text(MovieDataUtil.number2Unit(comment.usefulCount), style: TextStyle(fontSize: 12, color: AppColor.lightGrey)),
+              Text(MovieDataUtil.number2Unit(comment.usefulCount), style: TextStyle(fontSize: 12, color: Color(0xFFDDDDDD))),
             ],
           ),
           SizedBox(height: 15),

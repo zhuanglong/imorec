@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'package:imorec/common/style/app_style.dart';
+import 'package:provider/provider.dart';
+
 import 'package:imorec/modal/movie_item_modal.dart';
 import 'package:imorec/widget/movie_cover_image_widget.dart';
 import 'package:imorec/widget/rating_widget.dart';
 import 'package:imorec/util/navigator_util.dart';
 import 'package:imorec/util/movie_data_util.dart';
+import 'package:imorec/provider/theme_provider.dart';
 
 class MovieListItem extends StatelessWidget {
   final MovieItemModal movie;
@@ -16,6 +18,8 @@ class MovieListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeProvider themeProvider = context.select((ThemeProvider themeProvider) => themeProvider);
+  
     double imgWidth = 100;
     double height = imgWidth / 0.7;
     double spaceWidth = 15;
@@ -29,9 +33,8 @@ class MovieListItem extends StatelessWidget {
         padding: EdgeInsets.all(spaceWidth),
         decoration: BoxDecoration(
           border: Border(
-            bottom: BorderSide(color: AppColor.lightGrey, width: 0.5),
+            bottom: BorderSide(color: themeProvider.theme['itemSeparatorColor'], width: 0.5),
           ),
-          color: Colors.white,
         ),
         child: Row(
           children: <Widget>[
@@ -67,14 +70,14 @@ class MovieListItem extends StatelessWidget {
                         SizedBox(width: 5),
                         Text(
                           movie.rating.average.toString(),
-                          style: TextStyle(color: AppColor.grey, fontSize: 12.0),
+                          style: TextStyle(color: Color(0xFF888888), fontSize: 12.0),
                         ),
                       ],
                     ),
                     SizedBox(height: 10),
                     Text(
                       '${movie.year} /${MovieDataUtil.genres2String(movie.genres)}/${MovieDataUtil.actor2String(movie.directors)}/${MovieDataUtil.actor2String(movie.casts)}',
-                      style: TextStyle(color: AppColor.grey, fontSize: 14.0),
+                      style: TextStyle(color: Color(0xFF888888), fontSize: 14.0),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),

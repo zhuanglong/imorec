@@ -5,7 +5,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:imorec/util/navigator_util.dart';
 import 'package:imorec/modal/movie_news_modal.dart';
-import 'package:imorec/common/style/app_style.dart';
 
 class NewsBanner extends StatelessWidget {
   final List<MovieNewsModal> newsList;
@@ -15,7 +14,6 @@ class NewsBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
       child: CarouselSlider(
         options: CarouselOptions(
           aspectRatio: 2,
@@ -59,7 +57,7 @@ class NewsBanner extends StatelessWidget {
                         Text(
                           item.title,
                           style: TextStyle(
-                            color: AppColor.white,
+                            color: Colors.white,
                             fontSize: 16,
                             fontWeight: FontWeight.bold
                           ),
@@ -69,7 +67,7 @@ class NewsBanner extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: TextStyle(
-                            color: AppColor.white,
+                            color: Colors.white,
                           ),
                         ),
                       ],

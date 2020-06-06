@@ -32,17 +32,17 @@ class _MoviePhotoPreviewPageState extends State<MoviePhotoPreviewPage> {
     currentIndex = this.widget.index;
   }
 
-  onBack() {
+  void onBack() {
     Navigator.pop(context);
   }
 
-  onPageChanged(int index) {
+  void onPageChanged(int index) {
     setState(() {
       currentIndex = index;
     });
   }
 
-  onLongPress(BuildContext context) {
+  void onLongPress(BuildContext context) {
     showCupertinoModalPopup<String>(
       context: context,
       builder: (BuildContext context) => CupertinoActionSheet(
@@ -75,7 +75,7 @@ class _MoviePhotoPreviewPageState extends State<MoviePhotoPreviewPage> {
   }
 
   Future saveImageToAlbum(String imageUrl) async {
-    Toast.showDartGrey('正在保存...');
+    Toast.showDarkGrey('正在保存...');
 
     ApiService apiService = ApiService();
     var response = await apiService.getImage(imageUrl);
@@ -84,7 +84,7 @@ class _MoviePhotoPreviewPageState extends State<MoviePhotoPreviewPage> {
     var savedFile = File.fromUri(Uri.file(filePath));
     Future<File>.sync(() => savedFile);
   
-    Toast.showDartGrey('保存成功');
+    Toast.showDarkGrey('保存成功');
   }
 
   @override

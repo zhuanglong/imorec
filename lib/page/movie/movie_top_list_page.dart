@@ -4,15 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:provider/provider.dart';
 
-import 'package:imorec/app.dart' show routeObserver;
+import 'package:imorec/init/my_app.dart' show routeObserver;
 import 'package:imorec/common/api/api_service.dart';
-import 'package:imorec/common/style/app_style.dart';
 import 'package:imorec/modal/movie_item_modal.dart';
 import 'package:imorec/page/movie/widget/movie_list_item.dart';
 import 'package:imorec/page/movie/widget/movie_top_item.dart';
 import 'package:imorec/util/movie_data_util.dart';
-import 'package:imorec/util/screen_util.dart';
+import 'package:imorec/util/device_util.dart';
+import 'package:imorec/provider/theme_provider.dart';
 
 class MovieTopListPage extends StatefulWidget {
   final String action;
@@ -98,15 +99,17 @@ class _MovieTopListPageState extends State<MovieTopListPage> with RouteAware {
     super.dispose();
   }
 
-  onBack() {
+  void onBack() {
     Navigator.pop(context);
   }
 
-  updateStatusBar() {
+  void updateStatusBar() {
     if (navAlpha == 1) {
-      ScreenUtil.updateStatusBarStyle('dark');
+      ThemeProvider.isDark(context) ?
+        DeviceUtil.updateStatusBarStyle('light') : DeviceUtil.updateStatusBarStyle('dark');
     } else {
-      ScreenUtil.updateStatusBarStyle('light');
+      ThemeProvider.isDark(context) ?
+        DeviceUtil.updateStatusBarStyle('light') : DeviceUtil.updateStatusBarStyle('light');
     }
   }
 
@@ -158,10 +161,9 @@ class _MovieTopListPageState extends State<MovieTopListPage> with RouteAware {
     if (movieList.length == 0) {
       return Scaffold(
         appBar: AppBar(
-          elevation: 0,
           leading: GestureDetector(
             onTap: onBack,
-            child: Image.asset('images/icon_arrow_back_black.png'),
+            child: Image.asset('assets/images/icon_arrow_back_black.png'),
           ),
         ),
         body: Center(
@@ -190,37 +192,42 @@ class _MovieTopListPageState extends State<MovieTopListPage> with RouteAware {
   }
 
   Widget buildNavigationBar() {
+    ThemeProvider themeProvider = context.select((ThemeProvider themeProvider) => themeProvider);
     return Stack(
       children: <Widget>[
         Container(
           width: 44,
-          height: ScreenUtil.navigationBarHeight(context),
-          padding: EdgeInsets.fromLTRB(5, ScreenUtil.topSafeHeight(context), 0, 0),
+          height: DeviceUtil.navigationBarHeight(context),
+          padding: EdgeInsets.fromLTRB(5, DeviceUtil.topSafeHeight(context), 0, 0),
           child: GestureDetector(
             onTap: onBack,
-            child: Image.asset('images/icon_arrow_back_white.png'),
+            child: Image.asset('assets/images/icon_arrow_back_white.png'),
           ),
         ),
         Opacity(
           opacity: navAlpha,
           child: Container(
-            color: AppColor.white,
-            height: ScreenUtil.navigationBarHeight(context),
-            padding: EdgeInsets.fromLTRB(5, ScreenUtil.topSafeHeight(context), 0, 0),
+            color: themeProvider.theme['navBackgroundColor'],
+            height: DeviceUtil.navigationBarHeight(context),
+            padding: EdgeInsets.fromLTRB(5, DeviceUtil.topSafeHeight(context), 0, 0),
             child: Row(
               children: <Widget>[
                 Container(
                   width: 44,
                   child: GestureDetector(
                     onTap: onBack,
-                    child: Image.asset('images/icon_arrow_back_black.png'),
+                    child: Image.asset(themeProvider.theme['icon']['arrow_back']),
                   ),
                 ),
                 Expanded(
                   child: Text(
                     this.widget.title,
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                      color: themeProvider.theme['navTitleColor'],
+                    ),
                   ),
                 ),
                 Container(
@@ -235,8 +242,8 @@ class _MovieTopListPageState extends State<MovieTopListPage> with RouteAware {
   }
 
   Widget buildHeader() {
-    double coverWidth = ScreenUtil.width(context);
-    double coverHeight = 218 + ScreenUtil.topSafeHeight(context);
+    double coverWidth = DeviceUtil.width(context);
+    double coverHeight = 218 + DeviceUtil.topSafeHeight(context);
     return Container(
       width: coverWidth,
       height: coverHeight,
@@ -263,13 +270,13 @@ class _MovieTopListPageState extends State<MovieTopListPage> with RouteAware {
                   children: <Widget>[
                     Text(
                       this.widget.subTitle,
-                      style: TextStyle(color: AppColor.white),
+                      style: TextStyle(color: Colors.white),
                     ),
                     SizedBox(height: 20),
                     Text(
                       this.widget.title,
                       style: TextStyle(
-                        color: AppColor.white,
+                        color: Colors.white,
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
                       ),

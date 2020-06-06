@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
+import 'package:provider/provider.dart';
+
+import 'package:imorec/common/i18n/app_localizations.dart';
 import 'package:imorec/page/home/widget/three_grid.dart';
 import 'package:imorec/page/home/widget/news_banner.dart';
 import 'package:imorec/page/home/widget/top_banner.dart';
 import 'package:imorec/common/api/api_service.dart';
-import 'package:imorec/common/style/app_style.dart';
 import 'package:imorec/modal/movie_news_modal.dart';
 import 'package:imorec/modal/movie_item_modal.dart';
+import 'package:imorec/provider/theme_provider.dart';
 import 'package:imorec/util/movie_data_util.dart';
 import 'package:imorec/util/toast.dart';
 
@@ -48,30 +51,29 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-
-    if (newsList == null) {
-      return Center(
-        child: CupertinoActivityIndicator(),
-      );
-    } else {
-      return Scaffold(
-        appBar: AppBar(
-          brightness: Brightness.light,
-          title: Text('首页'),
-          backgroundColor: AppColor.white,
-          elevation: 0,
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {
-                Toast.show('开发中...');
-              },
-            ),
-          ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          AppLocalizations.i18n(context).homeTitle,
+          style: TextStyle(
+            color: context.select((ThemeProvider themeProvider) => themeProvider.theme['navTitleColor']),
+          ),
         ),
-        body: Container(
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              Toast.show('开发中...');
+            },
+          ),
+        ],
+      ),
+      body: newsList == null ?
+        Center(
+          child: CupertinoActivityIndicator(),
+        ) :
+        Container(
           child: RefreshIndicator(
-            color: AppColor.primary,
             onRefresh: fetchData,
             child: ListView(
               addAutomaticKeepAlives: true,
@@ -86,7 +88,6 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
             ),
           ),
         ),
-      );
-    }
+    );
   }
 }

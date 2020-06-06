@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
+import 'package:provider/provider.dart';
+
+import 'package:imorec/provider/theme_provider.dart';
 import 'package:imorec/common/api/api_service.dart';
 import 'package:imorec/modal/movie_item_modal.dart';
 import 'package:imorec/page/movie/widget/movie_list_item.dart';
@@ -38,7 +41,7 @@ class _MovieListPageState extends State<MovieListPage> {
     });
   }
 
-  back() {
+  onBack() {
     Navigator.pop(context);
   }
 
@@ -79,16 +82,20 @@ class _MovieListPageState extends State<MovieListPage> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeProvider themeProvider = context.select((ThemeProvider themeProvider) => themeProvider);
     return Scaffold(
       appBar: AppBar(
-        brightness: Brightness.light,
-        title: Text(this.widget.title),
-        backgroundColor: Colors.white,
-        leading: GestureDetector(
-          onTap: back,
-          child: Image.asset('images/icon_arrow_back_black.png'),
+        brightness: Theme.of(context).brightness,
+        title: Text(
+          this.widget.title,
+          style: TextStyle(
+            color: themeProvider.theme['navTitleColor'],
+          ),
         ),
-        elevation: 0,
+        leading: GestureDetector(
+          onTap: onBack,
+          child: Image.asset(themeProvider.theme['icon']['arrow_back']),
+        ),
       ),
       body: buildBody(),
     );

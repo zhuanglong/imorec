@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
+import 'package:provider/provider.dart';
+
+import 'package:imorec/provider/theme_provider.dart';
 import 'package:imorec/util/navigator_util.dart';
 
 class SectionBar extends StatelessWidget {
@@ -12,7 +15,6 @@ class SectionBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
       padding: EdgeInsets.fromLTRB(15, 15, 15, 5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -27,10 +29,14 @@ class SectionBar extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 5),
-              Container(
-                width: 80,
-                height: 2,
-                color: Colors.black,
+              Consumer<ThemeProvider>(
+                builder: (_, themeProvider, __) {
+                  return Container(
+                    width: 80,
+                    height: 2,
+                    color: themeProvider.theme['sectionBarLineColor'],
+                  );
+                },
               ),
             ],
           ),
@@ -50,9 +56,14 @@ class SectionBar extends StatelessWidget {
                         ),
                       ),
                       SizedBox(width: 3),
-                      Icon(
-                        CupertinoIcons.forward,
-                        size: 14,
+                      Consumer<ThemeProvider>(
+                        builder: (_, themeProvider, __) {
+                          return Icon(
+                            CupertinoIcons.forward,
+                            size: 14,
+                            color: themeProvider.theme['textColor1'],
+                          );
+                        },
                       ),
                     ],
                   ),

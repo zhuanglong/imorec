@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:provider/provider.dart';
 
-import 'package:imorec/common/style/app_style.dart';
 import 'package:imorec/util/navigator_util.dart';
-import 'package:imorec/util/screen_util.dart';
+import 'package:imorec/util/device_util.dart';
 import 'package:imorec/util/toast.dart';
+import 'package:imorec/provider/theme_provider.dart';
 
 class MyPage extends StatefulWidget {
   @override
@@ -16,27 +17,6 @@ class MyPage extends StatefulWidget {
 
 class _MyPageState extends State<MyPage> {
   String _avatarUrl = 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3454574876,1377139334&fm=27&gp=0.jpg';
-
-  @override
-  Widget build(BuildContext context) {
-    ScreenUtil.updateStatusBarStyle('light');
-    return Scaffold(
-      body: Container(
-        color: AppColor.white,
-        height: ScreenUtil.height(context),
-        width: ScreenUtil.width(context),
-        child: ListView(
-          padding: EdgeInsets.only(top: 0),
-          children: <Widget>[
-            buildHeader(),
-            buildItem('images/icon_github.png', '项目地址', openGithub),
-            buildItem('images/icon_qq.png', 'Flutter 技术群', copyQQNumber),
-            buildItem('images/icon_API.png', 'API 文档', openApi),
-          ],
-        ),
-      ),
-    );
-  }
 
   copyQQNumber() {
     Clipboard.setData(ClipboardData(text: '123xxxxx'));
@@ -51,7 +31,33 @@ class _MyPageState extends State<MyPage> {
     NavigatorUtil.pushWeb(context, 'https://github.com/zhuanglong/imorec', 'Morec');
   }
 
+  pushSettingPage() {
+    NavigatorUtil.pushSettingPage(context);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    DeviceUtil.updateStatusBarStyle('light');
+    return Scaffold(
+      body: Container(
+        height: DeviceUtil.height(context),
+        width: DeviceUtil.width(context),
+        child: ListView(
+          padding: EdgeInsets.only(top: 0),
+          children: <Widget>[
+            buildHeader(),
+            buildItem('assets/images/icon_github.png', '项目地址', openGithub),
+            buildItem('assets/images/icon_qq.png', 'Flutter 技术群', copyQQNumber),
+            buildItem('assets/images/icon_API.png', 'API 文档', openApi),
+            buildItem('assets/images/icon_account.png', '设置', pushSettingPage),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget buildItem(String icon, String text, onTap) {
+    ThemeProvider themeProvider = context.select((ThemeProvider themeProvider) => themeProvider);
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -61,7 +67,7 @@ class _MyPageState extends State<MyPage> {
           padding: EdgeInsets.symmetric(vertical: 15),
           decoration: BoxDecoration(
             border: Border(
-              bottom: BorderSide(color: AppColor.lightGrey, width: 0.5),
+              bottom: BorderSide(color: themeProvider.theme['itemSeparatorColor'], width: 0.5),
             ),
           ),
           child: Row(
@@ -82,7 +88,10 @@ class _MyPageState extends State<MyPage> {
                   ),
                 ],
               ),
-              Icon(Icons.keyboard_arrow_right)
+              Icon(
+                Icons.keyboard_arrow_right,
+                color: themeProvider.theme['textColor1'],
+              ),
             ],
           ),
         ),
@@ -91,7 +100,7 @@ class _MyPageState extends State<MyPage> {
   }
 
   Widget buildHeader() {
-    double width = ScreenUtil.width(context);
+    double width = DeviceUtil.width(context);
     double height = 250;
     return ClipRect(
       child: Stack(
@@ -130,7 +139,8 @@ class _MyPageState extends State<MyPage> {
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: AppColor.white,
+                      color: Colors.white,
+                      fontFamily: 'RobotoThin',
                     ),
                   ),
                 ],

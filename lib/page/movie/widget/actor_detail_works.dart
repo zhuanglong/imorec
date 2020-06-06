@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:imorec/util/navigator_util.dart';
 import 'package:imorec/util/utility.dart';
 import 'package:imorec/modal/movie_actor_detail_modal.dart';
-import 'package:imorec/common/style/app_style.dart';
 import 'package:imorec/widget/rating_widget.dart';
 import 'package:imorec/widget/movie_cover_image_widget.dart';
 
@@ -25,7 +24,7 @@ class ActorDetailWorks extends StatelessWidget {
               style: TextStyle(
                 fontSize: fixedFontSize(16),
                 fontWeight: FontWeight.bold,
-                color: AppColor.white,
+                color: Colors.white,
               ),
             ),
           ),
@@ -69,7 +68,7 @@ class ActorDetailWorks extends StatelessWidget {
               maxLines: 1,
               style: TextStyle(
                 fontSize: 14,
-                color: AppColor.white,
+                color: Colors.white,
               ),
             ),
             SizedBox(height: 3),
@@ -80,7 +79,7 @@ class ActorDetailWorks extends StatelessWidget {
                 Text(
                   work.movie.rating.average.toString(),
                   style: TextStyle(
-                    color: AppColor.grey,
+                    color: Color(0xFF888888),
                     fontSize: 12,
                   ),
                 ),

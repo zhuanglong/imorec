@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:imorec/page/home/widget/section_bar.dart';
 import 'package:imorec/modal/movie_item_modal.dart';
-import 'package:imorec/util/screen_util.dart';
+import 'package:imorec/util/device_util.dart';
 import 'package:imorec/util/navigator_util.dart';
-import 'package:imorec/common/style/app_style.dart';
 import 'package:imorec/widget/rating_widget.dart';
 import 'package:imorec/widget/movie_cover_image_widget.dart';
 
@@ -29,7 +28,6 @@ class ThreeGrid extends StatelessWidget {
     }
 
     return Container(
-      color: Colors.white,
       child: Column(
         children: <Widget>[
           SectionBar(title, action),
@@ -37,17 +35,14 @@ class ThreeGrid extends StatelessWidget {
             padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
             child: Wrap(spacing: 15, runSpacing: 20, children: children),
           ),
-          Container(
-            height: 10,
-            color: Color(0xFFF5F5F5),
-          ),
+          Container(height: 10),
         ],
       ),
     );
   }
 
   Widget buildCoverWithTitle(BuildContext context, {MovieItemModal movie, Widget child}) {
-    final double coverImageWidth = (ScreenUtil.width(context) - 15 * 4) / 3;
+    final double coverImageWidth = (DeviceUtil.width(context) - 15 * 4) / 3;
     return GestureDetector(
       onTap: () {
         NavigatorUtil.pushMovieDetail(context, movie.id);
@@ -87,7 +82,7 @@ class ThreeGrid extends StatelessWidget {
           Text(
             movie.rating.average.toString(),
             style: TextStyle(
-              color: AppColor.grey,
+              color: Color(0xFF888888),
               fontSize: 12,
             ),
           ),
@@ -107,7 +102,7 @@ class ThreeGrid extends StatelessWidget {
             '${movie.collectCount}人想看',
             style: TextStyle(
               fontSize: 10,
-              color: AppColor.grey,
+              color: Color(0xFF888888),
             ),
           ),
           SizedBox(height: 3),

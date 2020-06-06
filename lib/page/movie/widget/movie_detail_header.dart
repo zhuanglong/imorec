@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
 
-import 'package:imorec/common/style/app_style.dart';
 import 'package:imorec/modal/movie_detail_modal.dart';
-import 'package:imorec/util/screen_util.dart';
+import 'package:imorec/util/device_util.dart';
 import 'package:imorec/util/utility.dart';
 import 'package:imorec/util/movie_data_util.dart';
 import 'package:imorec/widget/movie_cover_image_widget.dart';
@@ -18,8 +17,8 @@ class MovieDetailHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = ScreenUtil.width(context);
-    double heihgt = 218 + ScreenUtil.topSafeHeight(context);
+    double width = DeviceUtil.width(context);
+    double heihgt = 218 + DeviceUtil.topSafeHeight(context);
 
     return Container(
       width: width,
@@ -44,7 +43,7 @@ class MovieDetailHeader extends StatelessWidget {
             width: width,
             height: heihgt,
             color: Colors.transparent,
-            padding: EdgeInsets.fromLTRB(15, 54 + ScreenUtil.topSafeHeight(context), 10, 0),
+            padding: EdgeInsets.fromLTRB(15, 54 + DeviceUtil.topSafeHeight(context), 10, 0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -72,7 +71,7 @@ class MovieDetailHeader extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontSize: fixedFontSize(20),
-                          color: AppColor.white,
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -83,7 +82,7 @@ class MovieDetailHeader extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontSize: fixedFontSize(16),
-                          color: AppColor.white,
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -96,7 +95,7 @@ class MovieDetailHeader extends StatelessWidget {
                           Text(
                             movieDetail.rating.average.toString(),
                             style: TextStyle(
-                              color: AppColor.white,
+                              color: Colors.white,
                               fontSize: fixedFontSize(12)
                             ),
                           ),
@@ -108,7 +107,7 @@ class MovieDetailHeader extends StatelessWidget {
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          color: AppColor.white,
+                          color: Colors.white,
                           fontSize: fixedFontSize(12),
                         ),
                       ),

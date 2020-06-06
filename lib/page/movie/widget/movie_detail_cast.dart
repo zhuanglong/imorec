@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
 
-import 'package:imorec/common/style/app_style.dart';
 import 'package:imorec/modal/movie_actor_modal.dart';
 import 'package:imorec/util/navigator_util.dart';
 import 'package:imorec/util/toast.dart';
@@ -37,7 +36,7 @@ class _MovieDetailCastState extends State<MovieDetailCast> {
               style: TextStyle(
                 fontSize: fixedFontSize(16),
                 fontWeight: FontWeight.bold,
-                color: AppColor.white,
+                color: Colors.white,
               ),
             ),
           ),
@@ -88,7 +87,7 @@ class _MovieDetailCastState extends State<MovieDetailCast> {
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 fontSize: fixedFontSize(14),
-                color: AppColor.white,
+                color: Colors.white,
               ),
             ),
           ),

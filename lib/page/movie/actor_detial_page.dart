@@ -10,8 +10,7 @@ import 'package:imorec/page/movie/widget/actor_detail_works.dart';
 import 'package:imorec/page/movie/widget/movie_photos.dart';
 import 'package:imorec/page/movie/widget/movie_summary.dart';
 import 'package:imorec/common/api/api_service.dart';
-import 'package:imorec/common/style/app_style.dart';
-import 'package:imorec/util/screen_util.dart';
+import 'package:imorec/util/device_util.dart';
 import 'package:imorec/util/toast.dart';
 
 class ActorDetialPage extends StatefulWidget {
@@ -26,7 +25,7 @@ class ActorDetialPage extends StatefulWidget {
 class _ActorDetialPageState extends State<ActorDetialPage> {
   MovieActorDetailModal actorDetail;
   double navAlpha = 0;
-  Color pageColor = AppColor.white;
+  Color pageColor = Colors.white;
   ScrollController scrollController = ScrollController();
 
   @override
@@ -54,11 +53,11 @@ class _ActorDetialPageState extends State<ActorDetialPage> {
     });
   }
 
-  onBack() {
+  void onBack() {
     Navigator.pop(context);
   }
   
-  onMorePhotos() {
+  void onMorePhotos() {
     Toast.show('开发中...');
   }
 
@@ -81,14 +80,13 @@ class _ActorDetialPageState extends State<ActorDetialPage> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.updateStatusBarStyle('light');
+    DeviceUtil.updateStatusBarStyle('light');
     if (actorDetail == null) {
       return Scaffold(
         appBar: AppBar(
-          elevation: 0,
           leading: GestureDetector(
             onTap: onBack,
-            child: Image.asset('images/icon_arrow_back_black.png'),
+            child: Image.asset('assets/images/icon_arrow_back_black.png'),
           ),
         ),
         body: Center(
@@ -129,32 +127,32 @@ class _ActorDetialPageState extends State<ActorDetialPage> {
       children: <Widget>[
         Container(
           width: 44,
-          height: ScreenUtil.navigationBarHeight(context),
-          padding: EdgeInsets.fromLTRB(5, ScreenUtil.topSafeHeight(context), 0, 0),
+          height: DeviceUtil.navigationBarHeight(context),
+          padding: EdgeInsets.fromLTRB(5, DeviceUtil.topSafeHeight(context), 0, 0),
           child: GestureDetector(
             onTap: onBack,
-            child: Image.asset('images/icon_arrow_back_white.png'),
+            child: Image.asset('assets/images/icon_arrow_back_white.png'),
           ),
         ),
         Opacity(
           opacity: navAlpha,
           child: Container(
             decoration: BoxDecoration(color: pageColor),
-            height: ScreenUtil.navigationBarHeight(context),
-            padding: EdgeInsets.fromLTRB(5, ScreenUtil.topSafeHeight(context), 0, 0),
+            height: DeviceUtil.navigationBarHeight(context),
+            padding: EdgeInsets.fromLTRB(5, DeviceUtil.topSafeHeight(context), 0, 0),
             child: Row(
               children: <Widget>[
                 Container(
                   width: 44,
                   child: GestureDetector(
                     onTap: onBack,
-                    child: Image.asset('images/icon_arrow_back_white.png'),
+                    child: Image.asset('assets/images/icon_arrow_back_white.png'),
                   ),
                 ),
                 Expanded(
                   child: Text(
                     actorDetail.name,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppColor.white),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.ellipsis,
                   ),
