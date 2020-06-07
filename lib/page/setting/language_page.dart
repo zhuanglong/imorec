@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:imorec/provider/locale_provider.dart';
 import 'package:imorec/provider/theme_provider.dart';
 import 'package:imorec/common/i18n/Language_names.dart';
-import 'package:imorec/util/navigator_util.dart';
+import 'package:imorec/router/router.dart';
 
 class LanguagePage extends StatefulWidget {
   @override
@@ -21,7 +21,7 @@ class _LanguagePageState extends State<LanguagePage> {
   ];
 
   void onBack() {
-    NavigatorUtil.back(context);
+    Router.back(context);
   }
 
   void onChangeLanguage(String locale) {

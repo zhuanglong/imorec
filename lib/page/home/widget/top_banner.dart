@@ -5,7 +5,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:palette_generator/palette_generator.dart';
 
 import 'package:imorec/common/api/api_service.dart';
-import 'package:imorec/util/navigator_util.dart';
+import 'package:imorec/router/router.dart';
 import 'package:imorec/util/movie_data_util.dart';
 import 'package:imorec/util/device_util.dart';
 import 'package:imorec/page/home/widget/section_bar.dart';
@@ -199,7 +199,7 @@ class _TopBannerState extends State<TopBanner> {
         items: banners.map((banner) =>
           GestureDetector(
             onTap: () {
-              NavigatorUtil.pushMovieTopList(context, banner.action, banner.title, banner.subTitle);
+              Router.pushMovieTopList(context, banner.action, banner.title, banner.subTitle);
             },
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 5),

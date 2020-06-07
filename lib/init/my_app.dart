@@ -1,15 +1,14 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:provider/provider.dart';
 
+import 'package:imorec/router/router.dart';
 import 'package:imorec/provider/locale_provider.dart';
 import 'package:imorec/provider/theme_provider.dart';
 import 'package:imorec/common/themes/theme_names.dart';
 import 'package:imorec/common/i18n/app_localizations_delegate.dart';
-import 'package:imorec/page/tabbar/tabbar_page.dart';
 import 'package:imorec/page/home/splash_page.dart';
 import 'package:imorec/util/toast.dart';
 
@@ -31,7 +30,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    context.read<ThemeProvider>().syncTheme();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      context.read<ThemeProvider>().syncTheme();
+    });
   }
 
   @override
@@ -86,7 +87,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
             locale: localeProvider.getLocale(),
 
             home: SplashPage(),
-            routes:  {'/TabbarPage': (BuildContext context) => TabbarPage()},
+            routes: Router.routes,
           );
         },
       );

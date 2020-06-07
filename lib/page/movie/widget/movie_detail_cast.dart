@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:imorec/modal/movie_actor_modal.dart';
-import 'package:imorec/util/navigator_util.dart';
+import 'package:imorec/router/router.dart';
 import 'package:imorec/util/toast.dart';
 import 'package:imorec/util/utility.dart';
 
@@ -71,7 +71,7 @@ class _MovieDetailCastState extends State<MovieDetailCast> {
               if (cast.id == null) {
                 Toast.show('暂无该演员信息');
               } else {
-                NavigatorUtil.pushActorDetail(context, cast.id);
+                Router.pushActorDetail(context, cast.id);
               }
             },
             child: CircleAvatar(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:imorec/util/navigator_util.dart';
+import 'package:imorec/router/router.dart';
 import 'package:imorec/util/utility.dart';
 import 'package:imorec/modal/movie_actor_detail_modal.dart';
 import 'package:imorec/widget/rating_widget.dart';
@@ -52,7 +52,7 @@ class ActorDetailWorks extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        NavigatorUtil.pushMovieDetail(context, work.movie.id);
+        Router.pushMovieDetail(context, work.movie.id);
       },
       child: Container(
         margin: EdgeInsets.only(left: 15,right: paddingRight),

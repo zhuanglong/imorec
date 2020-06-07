@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:imorec/router/router.dart';
 import 'package:provider/provider.dart';
 import 'package:flustars/flustars.dart';
 
@@ -32,7 +33,7 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   void goHomePage() {
-    Navigator.of(context).pushReplacementNamed('/TabbarPage');
+    Router.pushTabbarPage(context);
   }
 
   void goLoginPage() {

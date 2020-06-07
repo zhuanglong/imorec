@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:imorec/provider/theme_provider.dart';
-import 'package:imorec/util/navigator_util.dart';
+import 'package:imorec/router/router.dart';
 import 'package:imorec/util/device_util.dart';
 
 class SettingPage extends StatefulWidget {
@@ -16,7 +16,7 @@ class _SettingPageState extends State<SettingPage> {
   ThemeProvider themeProvider = ThemeProvider();
 
   void onBack() {
-    NavigatorUtil.back(context);
+    Router.back(context);
   }
 
   @override
@@ -48,8 +48,8 @@ class _SettingPageState extends State<SettingPage> {
           body: Container(
             child: ListView(
               children: <Widget>[
-                buildItem('主题颜色', () => NavigatorUtil.pushThemePage(context)),
-                buildItem('切换语言', () => NavigatorUtil.pushLanguagePage(context)),
+                buildItem('主题颜色', () => Router.pushThemePage(context)),
+                buildItem('切换语言', () => Router.pushLanguagePage(context)),
               ],
             ),
           ),

@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:provider/provider.dart';
 
-import 'package:imorec/util/navigator_util.dart';
+import 'package:imorec/router/router.dart';
 import 'package:imorec/util/device_util.dart';
 import 'package:imorec/util/toast.dart';
 import 'package:imorec/provider/theme_provider.dart';
@@ -18,21 +18,25 @@ class MyPage extends StatefulWidget {
 class _MyPageState extends State<MyPage> {
   String _avatarUrl = 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3454574876,1377139334&fm=27&gp=0.jpg';
 
-  copyQQNumber() {
+  void copyQQNumber() {
     Clipboard.setData(ClipboardData(text: '123xxxxx'));
     Toast.show('已复制 QQ 群号');
   }
 
-  openApi() {
-    NavigatorUtil.pushWeb(context, 'https://github.com/Mayandev/morec/blob/master/API.md', 'Api');
+  void openApi() {
+    Router.pushWeb(context, 'https://github.com/Mayandev/morec/blob/master/API.md', 'Api');
   }
 
-  openGithub() {
-    NavigatorUtil.pushWeb(context, 'https://github.com/zhuanglong/imorec', 'Morec');
+  void openGithub() {
+    Router.pushWeb(context, 'https://github.com/zhuanglong/imorec', 'Morec');
   }
 
-  pushSettingPage() {
-    NavigatorUtil.pushSettingPage(context);
+  void pushSettingPage() {
+    Router.pushSettingPage(context);
+  }
+
+  void pushTestPage() {
+    Router.pushTestPage(context);
   }
 
   @override
@@ -50,6 +54,7 @@ class _MyPageState extends State<MyPage> {
             buildItem('assets/images/icon_qq.png', 'Flutter 技术群', copyQQNumber),
             buildItem('assets/images/icon_API.png', 'API 文档', openApi),
             buildItem('assets/images/icon_account.png', '设置', pushSettingPage),
+            // buildItem('assets/images/icon_account.png', '我的测试', pushTestPage),
           ],
         ),
       ),

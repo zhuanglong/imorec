@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:imorec/modal/movie_item_modal.dart';
 import 'package:imorec/widget/movie_cover_image_widget.dart';
 import 'package:imorec/widget/rating_widget.dart';
-import 'package:imorec/util/navigator_util.dart';
+import 'package:imorec/router/router.dart';
 import 'package:imorec/util/movie_data_util.dart';
 import 'package:imorec/provider/theme_provider.dart';
 
@@ -27,7 +27,7 @@ class MovieListItem extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        NavigatorUtil.pushMovieDetail(context, movie.id);
+        Router.pushMovieDetail(context, movie.id);
       },
       child: Container(
         padding: EdgeInsets.all(spaceWidth),

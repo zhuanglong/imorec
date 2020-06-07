@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-import 'package:imorec/util/navigator_util.dart';
+import 'package:imorec/router/router.dart';
 import 'package:imorec/modal/movie_news_modal.dart';
 
 class NewsBanner extends StatelessWidget {
@@ -26,7 +26,7 @@ class NewsBanner extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 0.0, vertical: 5.0),
             child: GestureDetector(
               onTap: () {
-                NavigatorUtil.pushWeb(context, item.link, item.title);
+                Router.pushWeb(context, item.link, item.title);
               },
               child: Stack(
                 children: <Widget>[

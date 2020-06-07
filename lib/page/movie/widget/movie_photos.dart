@@ -5,7 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:imorec/modal/movie_photo_modal.dart';
 import 'package:imorec/modal/movie_trailer_modal.dart';
-import 'package:imorec/util/navigator_util.dart';
+import 'package:imorec/router/router.dart';
 import 'package:imorec/util/utility.dart';
 
 const double boxWidth = 160;
@@ -119,7 +119,7 @@ class TrailerItem extends StatelessWidget {
       margin: boxInterval,
       child: GestureDetector(
         onTap: () {
-           NavigatorUtil.pushVideoPlay(context, trailer.trailerUrl);
+           Router.pushVideoPlay(context, trailer.trailerUrl);
         },
         child: Stack(
           children: <Widget>[
@@ -173,7 +173,7 @@ class PhotoItem extends StatelessWidget {
       margin: boxInterval,
       child: GestureDetector(
         onTap: () {
-          NavigatorUtil.pushPhtotPreview(context, providers, index, imageUrls);
+          Router.pushPhtotPreview(context, providers, index, imageUrls);
         },
         child: ClipRRect(
           borderRadius: BorderRadius.circular(4),

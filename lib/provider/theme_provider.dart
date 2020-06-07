@@ -9,7 +9,7 @@ import 'package:imorec/common/themes/theme_light.dart';
 import 'package:imorec/common/themes/theme_names.dart';
 
 class ThemeProvider extends ChangeNotifier {
-  Map _theme;
+  Map _theme = themeLight;
   Map get theme => _theme;
 
   static bool isDark(BuildContext context) {

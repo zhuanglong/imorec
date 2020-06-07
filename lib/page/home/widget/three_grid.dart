@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:imorec/page/home/widget/section_bar.dart';
 import 'package:imorec/modal/movie_item_modal.dart';
 import 'package:imorec/util/device_util.dart';
-import 'package:imorec/util/navigator_util.dart';
+import 'package:imorec/router/router.dart';
 import 'package:imorec/widget/rating_widget.dart';
 import 'package:imorec/widget/movie_cover_image_widget.dart';
 
@@ -45,7 +45,7 @@ class ThreeGrid extends StatelessWidget {
     final double coverImageWidth = (DeviceUtil.width(context) - 15 * 4) / 3;
     return GestureDetector(
       onTap: () {
-        NavigatorUtil.pushMovieDetail(context, movie.id);
+        Router.pushMovieDetail(context, movie.id);
       },
       child: Container(
         width: coverImageWidth,

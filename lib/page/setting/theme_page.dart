@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 import 'package:imorec/provider/theme_provider.dart';
 import 'package:imorec/common/themes/theme_names.dart';
-import 'package:imorec/util/navigator_util.dart';
+import 'package:imorec/router/router.dart';
 
 class ThemePage extends StatefulWidget {
   @override
@@ -20,7 +20,7 @@ class _ThemePageState extends State<ThemePage> {
   ];
 
   void onBack() {
-    NavigatorUtil.back(context);
+    Router.back(context);
   }
 
   void onChangeTheme(String themeName) {
