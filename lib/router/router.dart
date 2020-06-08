@@ -53,7 +53,7 @@ class Router {
   static replace(BuildContext context, Widget scene) {
     Navigator.pushReplacement(
       context,
-      CupertinoPageRoute(builder: (BuildContext context) => scene),
+      MaterialPageRoute(builder: (BuildContext context) => scene),
     );
   }
 

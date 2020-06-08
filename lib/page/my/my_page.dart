@@ -28,7 +28,7 @@ class _MyPageState extends State<MyPage> {
   }
 
   void openGithub() {
-    Router.pushWeb(context, 'https://github.com/zhuanglong/imorec', 'Morec');
+    Router.pushWeb(context, 'https://github.com/zhuanglong/imorec', 'iMorec');
   }
 
   void pushSettingPage() {
